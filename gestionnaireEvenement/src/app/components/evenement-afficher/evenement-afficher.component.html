@@ -1,1 +1,51 @@
-<p>evenement-afficher works!</p>
+<mat-card>
+  <mat-card-title>
+    Evenements à venir
+    <button mat-fab aria-label="Ajouter un évènement">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  </mat-card-title>
+  <mat-accordion *ngFor="let event of eventsFuture">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="event_future_header">
+        <mat-panel-title class="event_future_header_title">
+          {{event.id}} - {{event.nom}}
+        </mat-panel-title>
+        <mat-panel-description class="event_future_header_description">
+          {{event.date | date : 'short' }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>Lieu : {{event.id_lieu}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>Invités : {{event.id_stagiaire}}</mat-list-item>
+        </mat-list>
+        <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button">
+          <mat-icon>auto_fix_normal</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Evènements passés
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let event of eventsPast">
+        <mat-card>
+          <mat-card-title>
+            {{event.id}} - {{event.nom}}
+          </mat-card-title>
+          <mat-card-content>
+            {{event.id_lieu}}
+            {{event.date | date : 'short' }}
+            {{event.id_stagiaire}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
