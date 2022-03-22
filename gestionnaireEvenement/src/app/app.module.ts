@@ -8,17 +8,19 @@ import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StagiaireComponent,],
   imports: [
     BrowserModule,
     AppRoutingModule,
     GoogleMapsModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

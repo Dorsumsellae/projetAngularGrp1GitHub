@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { STAGIAIRES } from 'src/app/mocks/stagiaires';
+import { Stagiaire } from 'src/app/models/stagiaire';
 
 @Component({
   selector: 'app-stagiaire',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stagiaire.component.scss']
 })
 export class StagiaireComponent implements OnInit {
-
+  stagiaires: Stagiaire[] = STAGIAIRES;
   constructor() { }
 
   ngOnInit(): void {
