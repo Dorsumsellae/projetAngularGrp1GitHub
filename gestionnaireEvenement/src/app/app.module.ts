@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 
@@ -14,6 +15,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     GoogleMapsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
