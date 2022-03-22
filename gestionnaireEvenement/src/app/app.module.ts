@@ -15,9 +15,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
+import { StagiaireDetailsComponent } from './components/stagiaire-details/stagiaire-details.component';
 
 @NgModule({
-  declarations: [AppComponent, StagiaireComponent, ContactComponent],
+  declarations: [
+    AppComponent,
+    StagiaireComponent,
+    ContactComponent,
+    StagiaireDetailsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
