@@ -13,17 +13,23 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 import { StagiaireDetailsComponent } from './components/stagiaire-details/stagiaire-details.component';
 import { EvenementAfficherComponent } from './components/evenement-afficher/evenement-afficher.component';
+import { EvenementAjouterComponent } from './components/evenement-ajouter/evenement-ajouter.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +38,7 @@ import { EvenementAfficherComponent } from './components/evenement-afficher/even
     ContactComponent,
     StagiaireDetailsComponent,
     EvenementAfficherComponent,
+    EvenementAjouterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,11 +47,16 @@ import { EvenementAfficherComponent } from './components/evenement-afficher/even
     GoogleMapsModule,
     MatCardModule,
     MatFormFieldModule,
+    MatInputModule,
     MatExpansionModule,
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
     MatListModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

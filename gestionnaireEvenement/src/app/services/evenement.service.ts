@@ -8,7 +8,7 @@ import { Evenement } from '../models/evenement';
 })
 export class EvenementService {
   evenement!: Evenement[];
-  evenementUrl = 'http://localhost:3000/evenements';
+  evenementUrl = 'http://[::1]:3000/evennements';
 
   private httpOptions = {
     headers: new HttpHeaders({ 'content-Type': 'application/json' }),
