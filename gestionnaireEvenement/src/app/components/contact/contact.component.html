@@ -1,1 +1,33 @@
-<p>contact works!</p>
+<mat-card class="container">
+  <h1>Formulaire de contact</h1>
+
+  <form [formGroup]="form">
+    <mat-form-field class="input-form" appearance="fill">
+
+      <mat-label>Nom :</mat-label>
+      <input matInput type="text" name="nom" ngModel minlength="2" maxlength="50" #champNom="ngModel">
+
+      <div class="alert">
+        <div *ngIf="champNom.errors?.['minlength']">Le Le nom doit comporter au moins 2 caractères</div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="input-form" appearance="fill">
+
+      <mat-label>Prenom :</mat-label>
+      <input matInput type="text" name="prenom" ngModel>
+
+    </mat-form-field>
+
+
+    <mat-form-field class="input-form" appearance="fill">
+
+      <mat-label>Email :</mat-label>
+      <input matInput type="text" name="mail">
+
+    </mat-form-field>
+    <mat-form-field class="input-form" appearance="fill">
+
+      <button mat-raised-button type="submit" [disabled]="form.invalid">Contactez moi!</button>
+    </mat-form-field>
+  </form>
+</mat-card>
