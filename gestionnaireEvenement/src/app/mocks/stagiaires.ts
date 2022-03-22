@@ -1,6 +1,6 @@
 import { Stagiaire } from '../models/stagiaire';
 
-export const STAGIAIRE: Stagiaire[] = [
+export const STAGIAIRES: Stagiaire[] = [
   { id_stagiaire: 1, nom: 'Mouton', prenom: 'Nicolas', telephone: '1234567890', adresse: 'LDNR Labege' },
   { id_stagiaire: 2, nom: 'Benslika', prenom: 'Dalila', telephone: '1234567890', adresse: 'LDNR Labege' },
   { id_stagiaire: 3, nom: 'Bah', prenom: 'Djibril', telephone: '1234567890', adresse: 'LDNR Labege' },

@@ -14,9 +14,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 
 @NgModule({
-  declarations: [AppComponent, ContactComponent],
+  declarations: [AppComponent, StagiaireComponent, ContactComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,7 +27,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     BrowserAnimationsModule,
@@ -34,4 +34,4 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
