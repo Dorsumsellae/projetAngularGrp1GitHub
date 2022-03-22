@@ -1,5 +1,5 @@
 CREATE TABLE stagiaire(
-   id_stagiaire SMALLINT,
+   id_stagiaire SMALLINT NOT NULL AUTO_INCREMENT,
    nom VARCHAR(50),
    prenom VARCHAR(50),
    telephone VARCHAR(50),
@@ -8,14 +8,14 @@ CREATE TABLE stagiaire(
 );
 
 CREATE TABLE lieu(
-   id_lieu SMALLINT,
+   id_lieu SMALLINT NOT NULL AUTO_INCREMENT,
    nom VARCHAR(50),
    adresse VARCHAR(50),
    PRIMARY KEY(id_lieu)
 );
 
 CREATE TABLE Evennement(
-   id_evenement SMALLINT,
+   id_evenement SMALLINT NOT NULL AUTO_INCREMENT,
    Nom VARCHAR(50),
    Jour DATETIME,
    id_lieu SMALLINT NOT NULL,
