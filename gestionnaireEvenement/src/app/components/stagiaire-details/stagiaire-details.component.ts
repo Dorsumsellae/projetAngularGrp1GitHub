@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Stagiaire } from 'src/app/models/stagiaire';
+import { StagiaireService } from 'src/app/services/stagiaire.service';
 @Component({
   selector: 'app-stagiaire-details',
   templateUrl: './stagiaire-details.component.html',
@@ -7,11 +8,22 @@ import { Stagiaire } from 'src/app/models/stagiaire';
 })
 export class StagiaireDetailsComponent implements OnInit {
 
-  @Input() stagiaire!: Stagiaire;
+  @Input() numero !: Number;
 
-  constructor() { }
+  @Input() stagiaire !: Stagiaire;
+
+  @Output()
+
+  deleteStagiaireEvent = new EventEmitter<Stagiaire>();
+
+  constructor(private stag: StagiaireService) { }
 
   ngOnInit(): void {
   }
 
+
+  traiterBoutonDelete(stag: Stagiaire) {
+    //this.ps.supprimerPersonne(p);
+    this.deleteStagiaireEvent.emit(stag);
+  }
 }

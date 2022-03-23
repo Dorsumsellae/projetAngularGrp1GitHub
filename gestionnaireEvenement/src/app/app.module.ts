@@ -40,6 +40,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { StagiaireAjouterComponent } from './components/stagiaire-ajouter/stagiaire-ajouter.component';
+import { StagiaireUpdateComponent } from './components/stagiaire-update/stagiaire-update.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { StagiaireAjouterComponent } from './components/stagiaire-ajouter/stagia
     EvenementAfficherComponent,
     EvenementAjouterComponent,
     EvenementModifierComponent,
+    StagiaireUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import { StagiaireAjouterComponent } from './components/stagiaire-ajouter/stagia
     ReactiveFormsModule,
     MatTabsModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     LayoutModule,

@@ -1,3 +1,24 @@
-<div>
+<mat-expansion-panel>
+  <mat-expansion-panel-header class="event_future_header">
+    <mat-panel-title class="event_future_header_title">
+      {{numero}} - {{stagiaire.nom | uppercase}} {{stagiaire.prenom}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>Telephone : {{stagiaire.telephone}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Adresse : {{stagiaire.adresse}}</mat-list-item>
+    </mat-list>
 
-</div>
+    <div class="example-button-row">
+      <div class="example-flex-container">
+        <div fxLayout="row" dir="rtl" fxFlexAlign="">
+          <div class="example-button-row">
+            <button mat-raised-button (click)="traiterBoutonDelete(stagiaire)"
+              class="button bt-modifier">Modifier</button>
+          </div>
+          <button mat-fab (click)="traiterBoutonDelete(stagiaire)" class="button">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
