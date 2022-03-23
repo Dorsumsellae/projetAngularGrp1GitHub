@@ -16,6 +16,19 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 import { StagiaireDetailsComponent } from './components/stagiaire-details/stagiaire-details.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MenuComponent } from './components/menu/menu.component';
+import { HomeComponent } from './components/home/home.component';
+import { EvenementComponent } from './components/evenement/evenement.component';
+import { EvenementAfficherComponent } from './components/evenement-afficher/evenement-afficher.component';
+import { EvenementAjouterComponent } from './components/evenement-ajouter/evenement-ajouter.component';
+import { EvenementModifierComponent } from './components/evenement-modifier/evenement-modifier.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -23,6 +36,13 @@ import { StagiaireDetailsComponent } from './components/stagiaire-details/stagia
     StagiaireComponent,
     ContactComponent,
     StagiaireDetailsComponent,
+    MenuComponent,
+    HomeComponent,
+    EvenementComponent,
+    EvenementAfficherComponent,
+    EvenementAjouterComponent,
+    EvenementModifierComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -33,11 +53,18 @@ import { StagiaireDetailsComponent } from './components/stagiaire-details/stagia
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTabsModule,
+    BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
