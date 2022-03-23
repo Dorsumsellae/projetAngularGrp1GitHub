@@ -1,10 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Stagiaire } from '../models/stagiaire';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StagiaireService {
+
+  private stagiaireURL = 'http://[::1]:3000/stagiaires';
+
   idStagiaireToStagiare(
     id_stagiaire: number,
     stagiaires: Stagiaire[]
@@ -27,5 +32,9 @@ export class StagiaireService {
     return stagiaire;
   }
 
-  constructor() {}
+  addStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
+    return this.http.post<Stagiaire>(this.stagiaireURL, stagiaire);
+  }
+
+  constructor(private http: HttpClient) { }
 }
