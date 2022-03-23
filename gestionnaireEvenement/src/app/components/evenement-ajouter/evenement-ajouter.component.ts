@@ -43,10 +43,7 @@ export class EvenementAjouterComponent implements OnInit {
     return {
       Nom: this.formAddEvent.value.name,
       id_lieu: this.formAddEvent.value.lieu,
-      Jour: new Date(this.formAddEvent.value.date)
-        .toISOString()
-        .slice(0, 19)
-        .replace('T', ' '),
+      Jour: new Date(this.formAddEvent.value.date),
       id_stagiaire: 1,
     } as Evenement;
   }

@@ -30,6 +30,7 @@ import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 import { StagiaireDetailsComponent } from './components/stagiaire-details/stagiaire-details.component';
 import { EvenementAfficherComponent } from './components/evenement-afficher/evenement-afficher.component';
 import { EvenementAjouterComponent } from './components/evenement-ajouter/evenement-ajouter.component';
+import { EvenementModifierComponent } from './components/evenement-modifier/evenement-modifier.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { EvenementAjouterComponent } from './components/evenement-ajouter/evenem
     StagiaireDetailsComponent,
     EvenementAfficherComponent,
     EvenementAjouterComponent,
+    EvenementModifierComponent,
   ],
   imports: [
     BrowserModule,
