@@ -17,8 +17,8 @@ import { EvenementModifierComponent } from '../evenement-modifier/evenement-modi
   styleUrls: ['./evenement-afficher.component.scss'],
 })
 export class EvenementAfficherComponent implements OnInit, OnChanges {
-  eventsFuture: Evenement[] = EVENEMENTS;
-  eventsPast: Evenement[] = EVENEMENTS;
+  eventsFuture!: Evenement[];
+  eventsPast!: Evenement[];
   stagiaires: Stagiaire[] = STAGIAIRES;
   guestsOfEvents: Invite_evennement[] = INVITE_EVENEMENT;
 
@@ -34,8 +34,10 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     this.eventsPast = [];
 
     this.es.getEvenement().subscribe((res) => {
+      console.log(Date.now());
+      console.log(res);
       res.forEach((evenement) => {
-        if (evenement.Jour > new Date()) {
+        if (evenement.Jour > new Date(Date.now())) {
           this.eventsFuture.push(evenement);
         } else {
           this.eventsPast.push(evenement);
@@ -67,7 +69,7 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     private es: EvenementService,
     public stagS: StagiaireService
   ) {
-    // this.updateEvents();
+    this.updateEvents();
   }
 
   ngOnInit(): void {}
