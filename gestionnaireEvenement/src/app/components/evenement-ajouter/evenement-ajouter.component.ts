@@ -61,7 +61,7 @@ export class EvenementAjouterComponent implements OnInit {
   constructor(
     private es: EvenementService,
     private ies: InviteEvenementService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

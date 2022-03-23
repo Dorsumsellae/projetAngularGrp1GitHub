@@ -23,14 +23,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 
-import { ContactComponent } from './components/contact/contact.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 import { StagiaireDetailsComponent } from './components/stagiaire-details/stagiaire-details.component';
 import { EvenementAfficherComponent } from './components/evenement-afficher/evenement-afficher.component';
 import { EvenementAjouterComponent } from './components/evenement-ajouter/evenement-ajouter.component';
 import { EvenementModifierComponent } from './components/evenement-modifier/evenement-modifier.component';
-
 import { MatTabsModule } from '@angular/material/tabs';
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -42,6 +41,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { StagiaireAjouterComponent } from './components/stagiaire-ajouter/stagiaire-ajouter.component';
 import { StagiaireUpdateComponent } from './components/stagiaire-update/stagiaire-update.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ContactComponent } from './components/contact/contact.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AProposComponent } from './components/a-propos/a-propos.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     EvenementAjouterComponent,
     EvenementModifierComponent,
     StagiaireUpdateComponent,
+    FooterComponent,
+    HeaderComponent,
+    AProposComponent
   ],
   imports: [
     BrowserModule,

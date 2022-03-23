@@ -1,12 +1,14 @@
+
 import { Injectable } from '@angular/core';
 import { Stagiaire } from '../models/stagiaire';
-import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StagiaireService {
+
 
   stagiaireUrl = 'http://[::1]:3000/stagiaires/';
 
@@ -40,6 +42,11 @@ export class StagiaireService {
 
   deleteStagiaire(stagiaireDelete: Stagiaire): Observable<any> {
     return this.http.delete<Stagiaire[]>(this.stagiaireUrl + '/' + stagiaireDelete.id_stagiaire);
+  }
+
+
+  addStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
+    return this.http.post<Stagiaire>(this.stagiaireURL, stagiaire);
   }
 
 }
