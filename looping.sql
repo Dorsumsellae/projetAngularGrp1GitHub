@@ -32,3 +32,8 @@ CREATE TABLE invites_evennement(
    FOREIGN KEY(id_stagiaire) REFERENCES stagiaire(id_stagiaire),
    FOREIGN KEY(id_evenement) REFERENCES Evennement(id_evenement)
 );
+
+
+INSERT INTO `stagiaire` (`id_stagiaire`, `nom`, `prenom`, `telephone`, `adresse`) VALUES (NULL, 'Mouton', 'Nicolas', '1234567890', 'LDNR Labege'),(NULL, 'Benslika', 'Dalila', '1234567890', 'LDNR Labege'), (NULL, 'Bah', 'Djibril', '1234567890', 'LDNR Labege'), (NULL, 'Hamadi', 'Mehdi', '1234567890', 'LDNR Labege'), (NULL, 'Buchner', 'Nina', '1234567890', 'LDNR Labege');
+
+INSERT INTO `lieu` (`id_lieu`, `nom`, `adresse`) VALUES (NULL, 'Toulouse', 'rue du capitole'), (NULL, 'Albi', 'rue du developpement'), (NULL, 'Labege', 'rue du web'), (NULL, 'LDNR', 'rue de la reussite'), (NULL, 'Zenith', 'rue du stress');
