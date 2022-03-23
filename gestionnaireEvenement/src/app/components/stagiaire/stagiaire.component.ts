@@ -9,6 +9,7 @@ import { Stagiaire } from 'src/app/models/stagiaire';
 })
 export class StagiaireComponent implements OnInit {
   stagiaires: Stagiaire[] = STAGIAIRES;
+
   constructor() { }
 
   ngOnInit(): void {

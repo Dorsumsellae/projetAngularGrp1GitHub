@@ -16,6 +16,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 import { StagiaireDetailsComponent } from './components/stagiaire-details/stagiaire-details.component';
+
 import { MatTabsModule } from '@angular/material/tabs';
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
@@ -30,6 +31,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
+import { StagiaireAjouterComponent } from './components/stagiaire-ajouter/stagiaire-ajouter.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +46,7 @@ import { MatListModule } from '@angular/material/list';
     EvenementAfficherComponent,
     EvenementAjouterComponent,
     EvenementModifierComponent,
+    StagiaireAjouterComponent,
 
   ],
   imports: [
