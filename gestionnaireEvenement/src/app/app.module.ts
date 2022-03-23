@@ -16,6 +16,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
 import { StagiaireDetailsComponent } from './components/stagiaire-details/stagiaire-details.component';
+import { StagiaireAjouterComponent } from './components/stagiaire-ajouter/stagiaire-ajouter.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { StagiaireDetailsComponent } from './components/stagiaire-details/stagia
     StagiaireComponent,
     ContactComponent,
     StagiaireDetailsComponent,
+    StagiaireAjouterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,4 +42,4 @@ import { StagiaireDetailsComponent } from './components/stagiaire-details/stagia
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
