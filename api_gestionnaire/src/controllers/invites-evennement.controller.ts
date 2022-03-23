@@ -17,33 +17,34 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {InvitesEvennement} from '../models';
+import {Invites_evennement} from '../models';
 import {InvitesEvennementRepository} from '../repositories';
 
 export class InvitesEvennementController {
   constructor(
     @repository(InvitesEvennementRepository)
-    public invitesEvennementRepository : InvitesEvennementRepository,
+    public invitesEvennementRepository: InvitesEvennementRepository,
   ) {}
 
   @post('/invites-evennements')
   @response(200, {
     description: 'InvitesEvennement model instance',
-    content: {'application/json': {schema: getModelSchemaRef(InvitesEvennement)}},
+    content: {
+      'application/json': {schema: getModelSchemaRef(Invites_evennement)},
+    },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(InvitesEvennement, {
+          schema: getModelSchemaRef(Invites_evennement, {
             title: 'NewInvitesEvennement',
-            
           }),
         },
       },
     })
-    invitesEvennement: InvitesEvennement,
-  ): Promise<InvitesEvennement> {
+    invitesEvennement: Invites_evennement,
+  ): Promise<Invites_evennement> {
     return this.invitesEvennementRepository.create(invitesEvennement);
   }
 
@@ -53,7 +54,7 @@ export class InvitesEvennementController {
     content: {'application/json': {schema: CountSchema}},
   })
   async count(
-    @param.where(InvitesEvennement) where?: Where<InvitesEvennement>,
+    @param.where(Invites_evennement) where?: Where<Invites_evennement>,
   ): Promise<Count> {
     return this.invitesEvennementRepository.count(where);
   }
@@ -65,14 +66,16 @@ export class InvitesEvennementController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(InvitesEvennement, {includeRelations: true}),
+          items: getModelSchemaRef(Invites_evennement, {
+            includeRelations: true,
+          }),
         },
       },
     },
   })
   async find(
-    @param.filter(InvitesEvennement) filter?: Filter<InvitesEvennement>,
-  ): Promise<InvitesEvennement[]> {
+    @param.filter(Invites_evennement) filter?: Filter<Invites_evennement>,
+  ): Promise<Invites_evennement[]> {
     return this.invitesEvennementRepository.find(filter);
   }
 
@@ -85,12 +88,12 @@ export class InvitesEvennementController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(InvitesEvennement, {partial: true}),
+          schema: getModelSchemaRef(Invites_evennement, {partial: true}),
         },
       },
     })
-    invitesEvennement: InvitesEvennement,
-    @param.where(InvitesEvennement) where?: Where<InvitesEvennement>,
+    invitesEvennement: Invites_evennement,
+    @param.where(Invites_evennement) where?: Where<Invites_evennement>,
   ): Promise<Count> {
     return this.invitesEvennementRepository.updateAll(invitesEvennement, where);
   }
@@ -100,14 +103,15 @@ export class InvitesEvennementController {
     description: 'InvitesEvennement model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(InvitesEvennement, {includeRelations: true}),
+        schema: getModelSchemaRef(Invites_evennement, {includeRelations: true}),
       },
     },
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(InvitesEvennement, {exclude: 'where'}) filter?: FilterExcludingWhere<InvitesEvennement>
-  ): Promise<InvitesEvennement> {
+    @param.filter(Invites_evennement, {exclude: 'where'})
+    filter?: FilterExcludingWhere<Invites_evennement>,
+  ): Promise<Invites_evennement> {
     return this.invitesEvennementRepository.findById(id, filter);
   }
 
@@ -120,11 +124,11 @@ export class InvitesEvennementController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(InvitesEvennement, {partial: true}),
+          schema: getModelSchemaRef(Invites_evennement, {partial: true}),
         },
       },
     })
-    invitesEvennement: InvitesEvennement,
+    invitesEvennement: Invites_evennement,
   ): Promise<void> {
     await this.invitesEvennementRepository.updateById(id, invitesEvennement);
   }
@@ -135,7 +139,7 @@ export class InvitesEvennementController {
   })
   async replaceById(
     @param.path.number('id') id: number,
-    @requestBody() invitesEvennement: InvitesEvennement,
+    @requestBody() invitesEvennement: Invites_evennement,
   ): Promise<void> {
     await this.invitesEvennementRepository.replaceById(id, invitesEvennement);
   }
