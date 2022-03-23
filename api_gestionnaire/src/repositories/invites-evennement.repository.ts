@@ -1,16 +1,14 @@
 import {inject} from '@loopback/core';
 import {DefaultCrudRepository} from '@loopback/repository';
 import {MariaDbDataSource} from '../datasources';
-import {InvitesEvennement, InvitesEvennementRelations} from '../models';
+import {Invites_evennement, InvitesEvennementRelations} from '../models';
 
 export class InvitesEvennementRepository extends DefaultCrudRepository<
-  InvitesEvennement,
-  typeof InvitesEvennement.prototype.id_stagiaire,
+  Invites_evennement,
+  typeof Invites_evennement.prototype.id_stagiaire,
   InvitesEvennementRelations
 > {
-  constructor(
-    @inject('datasources.mariaDb') dataSource: MariaDbDataSource,
-  ) {
-    super(InvitesEvennement, dataSource);
+  constructor(@inject('datasources.mariaDb') dataSource: MariaDbDataSource) {
+    super(Invites_evennement, dataSource);
   }
 }

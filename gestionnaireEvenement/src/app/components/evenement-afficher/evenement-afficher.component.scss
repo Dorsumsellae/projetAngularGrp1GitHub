@@ -1,0 +1,15 @@
+.event_future_header .event_future_header_title,
+.event_future_header .event_future_header_description {
+  flex-basis: 0;
+}
+
+.event_future_header .event_future_header_description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event_future_header_description_button {
+  padding: 0;
+  height: 30px;
+  width: 30px;
+}

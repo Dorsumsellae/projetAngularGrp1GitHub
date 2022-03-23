@@ -8,19 +8,21 @@ import { Evenement } from '../models/evenement';
 })
 export class EvenementService {
   evenement!: Evenement[];
-  evenementUrl = 'http://localhost:3000/evenements';
+  evenementUrl = 'http://[::1]:3000/evennements';
 
   private httpOptions = {
-    headers: new HttpHeaders({ 'content-Type': 'application/json' }),
+    headers: new HttpHeaders({
+      'content-Type': 'application/json',
+      accept: 'application/json',
+    }),
   };
-  constructor(private http: HttpClient) {}
 
   getEvenement(): Observable<Evenement[]> {
     return this.http.get<Evenement[]>(this.evenementUrl);
   }
 
   ajouterEvenement(evenement: Evenement): Observable<any> {
-    return this.http.post(this.evenementUrl, evenement, this.httpOptions);
+    return this.http.post(this.evenementUrl, evenement);
   }
 
   supprimerEvenement(evenement: Evenement) {
@@ -40,4 +42,6 @@ export class EvenementService {
   countEvenement(): Observable<any> {
     return this.http.get<Evenement>(this.evenementUrl + '/count');
   }
+
+  constructor(private http: HttpClient) {}
 }
