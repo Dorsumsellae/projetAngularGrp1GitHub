@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EVENEMENTS } from 'src/app/mocks/evenement';
 import { Evenement } from 'src/app/models/evenement';
 import { EvenementAjouterComponent } from '../evenement-ajouter/evenement-ajouter.component';
+import { EvenementModifierComponent } from '../evenement-modifier/evenement-modifier.component';
 
 @Component({
   selector: 'app-evenement-afficher',
@@ -14,14 +15,24 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   eventsPast: Evenement[] = EVENEMENTS;
 
   openAddEventDialog() {
-    const dialogRef = this.AddEventDialog.open(EvenementAjouterComponent);
+    const dialogRef = this.eventDialog.open(EvenementAjouterComponent);
 
     dialogRef.afterClosed().subscribe(() => {
       //this.updatePersonneEventEmitter.emit(this.personne);
     });
   }
 
-  constructor(public AddEventDialog: MatDialog) {}
+  openUpdateEventDialog(eventToUpdate: Evenement) {
+    const dialogRef = this.eventDialog.open(EvenementModifierComponent, {
+      data: eventToUpdate,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      //this.updatePersonneEventEmitter.emit(this.personne);
+    });
+  }
+
+  constructor(public eventDialog: MatDialog) {}
 
   ngOnInit(): void {}
 

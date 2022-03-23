@@ -21,7 +21,8 @@
           <mat-divider></mat-divider>
           <mat-list-item>Invités : {{event.id_stagiaire}}</mat-list-item>
         </mat-list>
-        <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button">
+        <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button"
+          (click)="openUpdateEventDialog(event)">
           <mat-icon>auto_fix_normal</mat-icon>
         </button>
       </mat-card-content>
