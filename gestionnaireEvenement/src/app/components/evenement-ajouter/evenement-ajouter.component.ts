@@ -7,6 +7,7 @@ import { Invite_evennement } from 'src/app/models/invite_evennement';
 import { Lieux } from 'src/app/models/lieux';
 import { Stagiaire } from 'src/app/models/stagiaire';
 import { EvenementService } from 'src/app/services/evenement.service';
+import { InviteEvenementService } from 'src/app/services/invite-evenement.service';
 
 @Component({
   selector: 'app-evenement-ajouter',
@@ -32,9 +33,7 @@ export class EvenementAjouterComponent implements OnInit {
       console.log('Evènement');
       console.log(event);
       this.es.ajouterEvenement(event).subscribe((res) => {
-        console.log('Réponse');
-        console.log(res);
-        this.formValueToInvites();
+        this.formValueToInvites(res.id_evenement);
       });
     }
   }
@@ -54,11 +53,15 @@ export class EvenementAjouterComponent implements OnInit {
         id_evenement: idEvent,
         id_stagiaire: invite,
       };
+      this.ies.ajoutInviteEvenement(inviteEvent).subscribe();
       console.log(inviteEvent);
     });
   }
 
-  constructor(private es: EvenementService) {}
+  constructor(
+    private es: EvenementService,
+    private ies: InviteEvenementService
+  ) {}
 
   ngOnInit(): void {}
 }

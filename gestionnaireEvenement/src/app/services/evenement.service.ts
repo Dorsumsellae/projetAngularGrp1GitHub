@@ -16,7 +16,6 @@ export class EvenementService {
       accept: 'application/json',
     }),
   };
-  constructor(private http: HttpClient) {}
 
   getEvenement(): Observable<Evenement[]> {
     return this.http.get<Evenement[]>(this.evenementUrl);
@@ -43,4 +42,6 @@ export class EvenementService {
   countEvenement(): Observable<any> {
     return this.http.get<Evenement>(this.evenementUrl + '/count');
   }
+
+  constructor(private http: HttpClient) {}
 }
