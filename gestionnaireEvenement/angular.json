@@ -35,7 +35,6 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "nod_modules/fullcalendar/",
               "src/styles.scss"
             ],
             "scripts": []
