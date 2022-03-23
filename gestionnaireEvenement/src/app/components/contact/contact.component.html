@@ -1,6 +1,5 @@
 <mat-card class="container">
   <h1>Formulaire de contact</h1>
-
   <form [formGroup]="form">
     <mat-form-field class="input-form" appearance="fill">
       <mat-label>Nom :</mat-label>
@@ -11,15 +10,21 @@
           Le Le nom doit comporter au moins 2 caractères</div>
       </div>
     </mat-form-field>
+
     <mat-form-field class="input-form" appearance="fill">
       <mat-label>Prenom :</mat-label>
       <input matInput type="text" name="prenom" formControlName="prenom">
     </mat-form-field>
 
     <mat-form-field class="input-form" appearance="fill">
+      <mat-label>Téléphone :</mat-label>
+      <input matInput type="text" formControlName="telephone">
+    </mat-form-field>
+
+    <mat-form-field class="input-form" appearance="fill">
       <mat-label>Email :</mat-label>
       <input matInput type="text" formControlName="mail">
     </mat-form-field>
-    <button mat-raised-button type="submit" [disabled]="this.form.invalid">Contactez moi!</button>
+    <button mat-raised-button [disabled]="this.form.invalid" type="submit">Contactez moi!</button>
   </form>
 </mat-card>
