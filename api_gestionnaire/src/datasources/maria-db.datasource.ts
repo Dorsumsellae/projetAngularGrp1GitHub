@@ -1,12 +1,12 @@
-import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
-import { juggler } from '@loopback/repository';
+import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
+import {juggler} from '@loopback/repository';
 
 const config = {
   name: 'mariaDb',
   connector: 'mysql',
   url: '',
   host: 'localhost',
-  port: 3306,
+  port: 8889,
   user: 'gestionnaire',
   password: '',
   database: 'gestionnaire',
@@ -19,12 +19,13 @@ const config = {
 @lifeCycleObserver('datasource')
 export class MariaDbDataSource
   extends juggler.DataSource
-  implements LifeCycleObserver {
+  implements LifeCycleObserver
+{
   static dataSourceName = 'mariaDb';
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.mariaDb', { optional: true })
+    @inject('datasources.config.mariaDb', {optional: true})
     dsConfig: object = config,
   ) {
     super(dsConfig);

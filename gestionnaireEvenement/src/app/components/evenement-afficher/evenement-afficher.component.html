@@ -16,11 +16,14 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-card-content>
-        <mat-list>
-          <mat-list-item>Lieu : {{event.id_lieu}}</mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>Invités : {{event.id_stagiaire}}</mat-list-item>
-        </mat-list>
+        <h3>
+          Lieu :
+        </h3>
+        <p>{{event.id_lieu}}</p>
+        <h3>
+          Propriétaire :
+        </h3>
+        <p>{{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires)}}</p>
         <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button"
           (click)="openUpdateEventDialog(event)">
           <mat-icon>auto_fix_normal</mat-icon>

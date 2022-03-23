@@ -5,7 +5,7 @@ import { Stagiaire } from '../models/stagiaire';
   providedIn: 'root',
 })
 export class StagiaireService {
-  idStagiaireToStagiare(
+  idStagiaireToStagiaire(
     id_stagiaire: number,
     stagiaires: Stagiaire[]
   ): Stagiaire {
