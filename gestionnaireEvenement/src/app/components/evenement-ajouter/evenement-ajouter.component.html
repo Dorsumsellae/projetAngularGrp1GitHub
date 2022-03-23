@@ -7,9 +7,12 @@
       <input matInput type="text" name="name" formControlName="name">
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label for="place">Lieu</mat-label>
-      <input matInput type="text" name="place" formControlName="place">
+    <mat-form-field appearance="fill">
+      <mat-label>Lieu</mat-label>
+      <mat-select formControlName="lieu">
+        <mat-option *ngFor="let lieu of lieux" [value]="lieu.id_lieu">{{lieu.nom}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field>

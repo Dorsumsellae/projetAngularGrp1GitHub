@@ -9,10 +9,10 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header class="event_future_header">
         <mat-panel-title class="event_future_header_title">
-          {{event.id}} - {{event.nom}}
+          {{event.id}} - {{event.Nom}}
         </mat-panel-title>
         <mat-panel-description class="event_future_header_description">
-          {{event.date | date : 'short' }}
+          {{event.Jour | date : 'short' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-card-content>
@@ -37,11 +37,11 @@
       <div *ngFor="let event of eventsPast">
         <mat-card>
           <mat-card-title>
-            {{event.id}} - {{event.nom}}
+            {{event.id}} - {{event.Nom}}
           </mat-card-title>
           <mat-card-content>
             {{event.id_lieu}}
-            {{event.date | date : 'short' }}
+            {{event.Jour | date : 'short' }}
             {{event.id_stagiaire}}
           </mat-card-content>
         </mat-card>
