@@ -13,7 +13,7 @@ export class StagiaireService {
     headers: new HttpHeaders({ 'Content-type': 'application/json' }),
   };
 
-  idStagiaireToStagiare(
+  idStagiaireToStagiaire(
     id_stagiaire: number,
     stagiaires: Stagiaire[]
   ): Stagiaire {
@@ -44,6 +44,6 @@ export class StagiaireService {
   }
 
   addStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
-    return this.http.post<Stagiaire>(this.stagiaireURL, stagiaire);
+    return this.http.post<Stagiaire>(this.stagiaireUrl, stagiaire);
   }
 }
