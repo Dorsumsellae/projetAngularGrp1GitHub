@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Stagiaire } from 'src/app/models/stagiaire';
 import { StagiaireService } from 'src/app/services/stagiaire.service';
 import { StagiaireAjouterComponent } from '../stagiaire-ajouter/stagiaire-ajouter.component';
@@ -10,13 +9,22 @@ import { StagiaireAjouterComponent } from '../stagiaire-ajouter/stagiaire-ajoute
   templateUrl: './stagiaire.component.html',
   styleUrls: ['./stagiaire.component.scss'],
 })
-export class StagiaireComponent implements OnInit {
-  stagiaires: Stagiaire[] = STAGIAIRES;
+export class StagiaireComponent implements OnInit, OnChanges {
+  stagiaires!: Stagiaire[];
   stagiaireSelected!: Stagiaire;
 
-  constructor(private st: StagiaireService, public eventDialog: MatDialog) {}
+  constructor(private st: StagiaireService, public eventDialog: MatDialog) {
+    this.updateStagiaires();
+  }
+
+  updateStagiaires() {
+    this.st.getStagiaire().subscribe((res) => {
+      this.stagiaires = res;
+    });
+  }
 
   ngOnInit(): void {}
+  ngOnChanges(): void {}
 
   afficherInfoStagiaire(stag: Stagiaire) {
     this.stagiaireSelected = stag;
@@ -24,13 +32,13 @@ export class StagiaireComponent implements OnInit {
 
   traiterSuppressionStagiaire(stagiaireASupprimer: Stagiaire) {
     this.st.deleteStagiaire(stagiaireASupprimer).subscribe();
+    this.updateStagiaires();
   }
 
   openAddStagiaireDialog() {
     const dialogRef = this.eventDialog.open(StagiaireAjouterComponent);
-
     dialogRef.afterClosed().subscribe(() => {
-      //this.updateEvents();
+      this.updateStagiaires();
     });
   }
 }

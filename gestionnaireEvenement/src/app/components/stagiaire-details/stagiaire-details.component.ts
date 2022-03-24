@@ -4,26 +4,21 @@ import { StagiaireService } from 'src/app/services/stagiaire.service';
 @Component({
   selector: 'app-stagiaire-details',
   templateUrl: './stagiaire-details.component.html',
-  styleUrls: ['./stagiaire-details.component.scss']
+  styleUrls: ['./stagiaire-details.component.scss'],
 })
 export class StagiaireDetailsComponent implements OnInit {
+  @Input() numero!: Number;
 
-  @Input() numero !: Number;
-
-  @Input() stagiaire !: Stagiaire;
+  @Input() stagiaire!: Stagiaire;
 
   @Output()
-
   deleteStagiaireEvent = new EventEmitter<Stagiaire>();
 
-  constructor(private stag: StagiaireService) { }
+  constructor(private st: StagiaireService) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   traiterBoutonDelete(stag: Stagiaire) {
-    //this.ps.supprimerPersonne(p);
     this.deleteStagiaireEvent.emit(stag);
   }
 }
