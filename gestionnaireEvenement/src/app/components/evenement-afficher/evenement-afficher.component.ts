@@ -2,7 +2,6 @@ import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { INVITE_EVENEMENT } from 'src/app/mocks/invite_evenement';
-import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Evenement } from 'src/app/models/evenement';
 import { Invite_evennement } from 'src/app/models/invite_evennement';
 import { Lieux } from 'src/app/models/lieux';
@@ -79,7 +78,7 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     this.updateEvents();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  ngOnChanges(): void {}
+  ngOnChanges(): void { }
 }
