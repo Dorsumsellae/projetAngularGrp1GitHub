@@ -6,6 +6,7 @@ import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Evenement } from 'src/app/models/evenement';
 import { Lieux } from 'src/app/models/lieux';
 import { Stagiaire } from 'src/app/models/stagiaire';
+import { EvenementService } from 'src/app/services/evenement.service';
 
 @Component({
   selector: 'app-evenement-modifier',
@@ -24,9 +25,30 @@ export class EvenementModifierComponent implements OnInit {
     proprietaire: new FormControl(this.data.id_stagiaire),
   });
 
-  updateEvent() {}
+  updateEvent() {
+    if (!this.formUpdateEvent.invalid) {
+      console.log(this.formUpdateEvent.value);
+      let event = this.formValueToEvent();
+      console.log('Evènement');
+      console.log(event);
+      this.es.updateEvenement(event).subscribe();
+    }
+  }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Evenement) {}
+  formValueToEvent(): Evenement {
+    return {
+      Nom: this.formUpdateEvent.value.name,
+      id_lieu: this.formUpdateEvent.value.lieu,
+      Jour: new Date(this.formUpdateEvent.value.date),
+      id_stagiaire: this.formUpdateEvent.value.proprietaire,
+      id_evenement: this.data.id_evenement,
+    } as Evenement;
+  }
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Evenement,
+    private es: EvenementService
+  ) {}
 
   ngOnInit(): void {}
 }

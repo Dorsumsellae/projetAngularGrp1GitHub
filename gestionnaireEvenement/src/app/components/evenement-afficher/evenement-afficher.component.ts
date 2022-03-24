@@ -1,6 +1,5 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EVENEMENTS } from 'src/app/mocks/evenement';
 import { INVITE_EVENEMENT } from 'src/app/mocks/invite_evenement';
 import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Evenement } from 'src/app/models/evenement';
@@ -34,15 +33,22 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     this.eventsPast = [];
 
     this.es.getEvenement().subscribe((res) => {
-      console.log(Date.now());
-      console.log(res);
+      let today = Date.now();
       res.forEach((evenement) => {
-        if (evenement.Jour > new Date(Date.now())) {
+        let jourEvenement = evenement.Jour;
+        //let jourEvenementTS = jourEvenement?.getTime();
+        console.log(jourEvenement);
+        console.log(today);
+        if (new Date(jourEvenement) > new Date(today)) {
           this.eventsFuture.push(evenement);
         } else {
           this.eventsPast.push(evenement);
         }
       });
+      console.log('eventsPast');
+      console.log(this.eventsPast);
+      console.log('event future');
+      console.log(this.eventsFuture);
     });
   }
 
@@ -58,9 +64,8 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     const dialogRef = this.eventDialog.open(EvenementModifierComponent, {
       data: eventToUpdate,
     });
-
     dialogRef.afterClosed().subscribe(() => {
-      //this.updatePersonneEventEmitter.emit(this.personne);
+      this.updateEvents();
     });
   }
 

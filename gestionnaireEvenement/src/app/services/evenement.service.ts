@@ -26,14 +26,14 @@ export class EvenementService {
   }
 
   supprimerEvenement(evenement: Evenement) {
-    return this.http.delete(this.evenementUrl + '/' + evenement.id, {
+    return this.http.delete(this.evenementUrl + '/' + evenement.id_evenement, {
       body: evenement,
     });
   }
 
   updateEvenement(evenement: Evenement) {
-    return this.http.put(
-      `${this.evenementUrl}/${evenement.id}`,
+    return this.http.patch(
+      `${this.evenementUrl}/${evenement.id_evenement}`,
       evenement,
       this.httpOptions
     );

@@ -9,7 +9,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header class="event_future_header">
         <mat-panel-title class="event_future_header_title">
-          {{event.id}} - {{event.Nom}}
+          {{event.id_evenement}} - {{event.Nom}}
         </mat-panel-title>
         <mat-panel-description class="event_future_header_description">
           {{event.Jour | date : 'short' }}
@@ -20,10 +20,8 @@
           Lieu :
         </h3>
         <p>{{event.id_lieu}}</p>
-        <h3>
-          Propriétaire :
-        </h3>
-        <p>{{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires)}}</p>
+        <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
+          {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
         <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button"
           (click)="openUpdateEventDialog(event)">
           <mat-icon>auto_fix_normal</mat-icon>
@@ -41,12 +39,13 @@
       <div *ngFor="let event of eventsPast">
         <mat-card>
           <mat-card-title>
-            {{event.id}} - {{event.Nom}}
+            {{event.id_evenement}} - {{event.Nom}}
           </mat-card-title>
           <mat-card-content>
             {{event.id_lieu}}
             {{event.Jour | date : 'short' }}
-            {{event.id_stagiaire}}
+            <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
+              {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
           </mat-card-content>
         </mat-card>
       </div>
