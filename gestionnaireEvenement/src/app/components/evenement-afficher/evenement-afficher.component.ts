@@ -1,13 +1,12 @@
 import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
-import { INVITE_EVENEMENT } from 'src/app/mocks/invite_evenement';
-import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Evenement } from 'src/app/models/evenement';
 import { Invite_evennement } from 'src/app/models/invite_evennement';
 import { Lieux } from 'src/app/models/lieux';
 import { Stagiaire } from 'src/app/models/stagiaire';
 import { EvenementService } from 'src/app/services/evenement.service';
+import { InviteEvenementService } from 'src/app/services/invite-evenement.service';
 import { LieuService } from 'src/app/services/lieu.service';
 import { StagiaireService } from 'src/app/services/stagiaire.service';
 import { EvenementAjouterComponent } from '../evenement-ajouter/evenement-ajouter.component';
@@ -26,9 +25,9 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   eventsPast!: Evenement[];
   stagiaires!: Stagiaire[];
   lieux!: Lieux[];
-  guestsOfEvents: Invite_evennement[] = INVITE_EVENEMENT;
+  guestsOfEvents!: Invite_evennement[];
 
-  updateStagiaire() {
+  updateStagiaires() {
     this.stagS
       .getStagiaire()
       .subscribe((stagiaires: Stagiaire[]) => (this.stagiaires = stagiaires));
@@ -53,6 +52,16 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     });
   }
 
+  updateGuests() {
+    this.gs
+      .getInviteEvenement()
+      .subscribe(
+        (guestsOfEvents: Invite_evennement[]) =>
+          (this.guestsOfEvents = guestsOfEvents)
+      );
+    console.log('update invités');
+  }
+
   openAddEventDialog() {
     const dialogRef = this.eventDialog.open(EvenementAjouterComponent);
     dialogRef.afterClosed().subscribe(() => {
@@ -73,9 +82,11 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     public eventDialog: MatDialog,
     private es: EvenementService,
     public stagS: StagiaireService,
+    public gs: InviteEvenementService,
     public ls: LieuService
   ) {
-    this.updateStagiaire();
+    this.updateGuests();
+    this.updateStagiaires();
     this.updateEvents();
   }
 
