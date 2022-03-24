@@ -5,7 +5,11 @@
       <mat-icon>plus_one</mat-icon>
     </button>
   </mat-card-title>
-  <mat-accordion *ngFor="let event of eventsFuture">
+  <div class="example-action-buttons">
+    <button mat-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+  </div>
+  <mat-accordion *ngFor="let event of eventsFuture" multi>
     <mat-expansion-panel>
       <mat-expansion-panel-header class="event_future_header">
         <mat-panel-title class="event_future_header_title">
@@ -41,8 +45,8 @@
             {{event.id_evenement}} - {{event.Nom}}
           </mat-card-title>
           <mat-card-content>
-            {{event.id_lieu}}
-            {{event.Jour | date : 'short' }}
+            <p> Lieu : {{this.ls.idLieuxToLieu(event.id_lieu, lieux).nom}}</p>
+            <p>Date : {{event.Jour | date : 'short' }}</p>
             <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
               {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
           </mat-card-content>

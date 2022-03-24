@@ -46,4 +46,8 @@ export class StagiaireService {
   addStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
     return this.http.post<Stagiaire>(this.stagiaireUrl, stagiaire);
   }
+
+  getStagiaire(): Observable<Stagiaire[]> {
+    return this.http.get<Stagiaire[]>(this.stagiaireUrl);
+  }
 }

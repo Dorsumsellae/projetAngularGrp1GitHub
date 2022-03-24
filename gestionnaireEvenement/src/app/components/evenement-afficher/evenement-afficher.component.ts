@@ -1,5 +1,6 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatAccordion } from '@angular/material/expansion';
 import { INVITE_EVENEMENT } from 'src/app/mocks/invite_evenement';
 import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Evenement } from 'src/app/models/evenement';
@@ -18,16 +19,19 @@ import { EvenementModifierComponent } from '../evenement-modifier/evenement-modi
   styleUrls: ['./evenement-afficher.component.scss'],
 })
 export class EvenementAfficherComponent implements OnInit, OnChanges {
+  @ViewChild(MatAccordion)
+  accordion!: MatAccordion;
+
   eventsFuture!: Evenement[];
   eventsPast!: Evenement[];
-  stagiaires: Stagiaire[] = STAGIAIRES;
+  stagiaires!: Stagiaire[];
   lieux!: Lieux[];
   guestsOfEvents: Invite_evennement[] = INVITE_EVENEMENT;
 
   updateStagiaire() {
-    /* this.stagS
+    this.stagS
       .getStagiaire()
-      .subscribe((stagiaires: Stagiaire[]) => (this.stagiaires = stagiaires)); */
+      .subscribe((stagiaires: Stagiaire[]) => (this.stagiaires = stagiaires));
     console.log('update personne');
   }
 
@@ -36,13 +40,8 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     this.eventsPast = [];
 
     this.es.getEvenement().subscribe((res) => {
-      let today = Date.now();
       res.forEach((evenement) => {
-        let jourEvenement = evenement.Jour;
-        //let jourEvenementTS = jourEvenement?.getTime();
-        console.log(jourEvenement);
-        console.log(today);
-        if (new Date(jourEvenement) > new Date(today)) {
+        if (new Date(evenement.Jour) > new Date(Date.now())) {
           this.eventsFuture.push(evenement);
         } else {
           this.eventsPast.push(evenement);
@@ -56,7 +55,6 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
 
   openAddEventDialog() {
     const dialogRef = this.eventDialog.open(EvenementAjouterComponent);
-
     dialogRef.afterClosed().subscribe(() => {
       this.updateEvents();
     });
@@ -77,13 +75,11 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     public stagS: StagiaireService,
     public ls: LieuService
   ) {
+    this.updateStagiaire();
     this.updateEvents();
   }
 
   ngOnInit(): void {}
 
-  ngOnChanges(): void {
-    //this.updatePersonne();
-    //this.updateDisplayContact(this.changeToggle);
-  }
+  ngOnChanges(): void {}
 }
