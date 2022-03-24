@@ -17,9 +17,8 @@
       </mat-expansion-panel-header>
       <mat-card-content>
         <h3>
-          Lieu :
+          Lieu : {{this.ls.idLieuxToLieu(event.id_lieu, lieux).nom}}
         </h3>
-        <p>{{event.id_lieu}}</p>
         <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
           {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
         <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button"

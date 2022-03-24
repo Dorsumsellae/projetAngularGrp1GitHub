@@ -4,8 +4,10 @@ import { INVITE_EVENEMENT } from 'src/app/mocks/invite_evenement';
 import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Evenement } from 'src/app/models/evenement';
 import { Invite_evennement } from 'src/app/models/invite_evennement';
+import { Lieux } from 'src/app/models/lieux';
 import { Stagiaire } from 'src/app/models/stagiaire';
 import { EvenementService } from 'src/app/services/evenement.service';
+import { LieuService } from 'src/app/services/lieu.service';
 import { StagiaireService } from 'src/app/services/stagiaire.service';
 import { EvenementAjouterComponent } from '../evenement-ajouter/evenement-ajouter.component';
 import { EvenementModifierComponent } from '../evenement-modifier/evenement-modifier.component';
@@ -19,6 +21,7 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   eventsFuture!: Evenement[];
   eventsPast!: Evenement[];
   stagiaires: Stagiaire[] = STAGIAIRES;
+  lieux!: Lieux[];
   guestsOfEvents: Invite_evennement[] = INVITE_EVENEMENT;
 
   updateStagiaire() {
@@ -45,10 +48,9 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
           this.eventsPast.push(evenement);
         }
       });
-      console.log('eventsPast');
-      console.log(this.eventsPast);
-      console.log('event future');
-      console.log(this.eventsFuture);
+      this.ls.getLieux().subscribe((res: Lieux[]) => {
+        this.lieux = res;
+      });
     });
   }
 
@@ -72,7 +74,8 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   constructor(
     public eventDialog: MatDialog,
     private es: EvenementService,
-    public stagS: StagiaireService
+    public stagS: StagiaireService,
+    public ls: LieuService
   ) {
     this.updateEvents();
   }
