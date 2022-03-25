@@ -27,10 +27,7 @@ export class EvenementAjouterComponent implements OnInit {
 
   addEvent() {
     if (!this.formAddEvent.invalid) {
-      console.log(this.formAddEvent.value);
       let event = this.formValueToEvent();
-      console.log('Evènement');
-      console.log(event);
       this.es.ajouterEvenement(event).subscribe((res) => {
         this.formValueToInvites(res.id_evenement);
       });

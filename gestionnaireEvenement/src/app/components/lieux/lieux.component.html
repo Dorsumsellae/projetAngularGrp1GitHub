@@ -1,4 +1,9 @@
 <div class="mat-elevation-z8">
+
+  <h2>Liste Lieux </h2>
+  <button mat-fab aria-label="Ajouter un évènement" (click)="openAddLieuDialog()">
+    <mat-icon>plus_one</mat-icon>
+  </button>
   <table mat-table [dataSource]="dataSource">
 
     <!-- ID Column -->

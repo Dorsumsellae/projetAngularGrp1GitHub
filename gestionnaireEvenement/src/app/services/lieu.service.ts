@@ -20,17 +20,22 @@ export class LieuService {
     return this.http.get<Lieux[]>(this.lieuUrl);
   }
 
-  ajouterEvenement(lieu: Lieux): Observable<any> {
+  /**
+   * Ajoute un lieu à la base
+   *
+   * @param lieu l'objet à ajouter
+   */
+  ajouterLieu(lieu: Lieux): Observable<any> {
     return this.http.post(this.lieuUrl, lieu);
   }
 
-  supprimerEvenement(lieu: Lieux) {
+  supprimerLieu(lieu: Lieux) {
     return this.http.delete(this.lieuUrl + '/' + lieu.id_lieu, {
       body: lieu,
     });
   }
 
-  updateEvenement(evenement: Lieux) {
+  updateLieu(evenement: Lieux) {
     return this.http.patch(
       `${this.lieuUrl}/${evenement.id_lieu}`,
       evenement,
