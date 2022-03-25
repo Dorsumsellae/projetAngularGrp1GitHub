@@ -1,4 +1,11 @@
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { Evenement } from 'src/app/models/evenement';
@@ -21,9 +28,15 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
 
+  @Input()
+  updateEvent!: Evenement;
+
+  @Input()
+  event!: Evenement;
+
+  stagiaires!: Stagiaire[];
   eventsFuture!: Evenement[];
   eventsPast!: Evenement[];
-  stagiaires!: Stagiaire[];
   lieux!: Lieux[];
   guestsOfEvents!: Invite_evennement[];
 
@@ -32,6 +45,16 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
       .getStagiaire()
       .subscribe((stagiaires: Stagiaire[]) => (this.stagiaires = stagiaires));
     console.log('update personne');
+  }
+
+  traiterSuppressionEvennement(evennementAsupprimer: Evenement): void {
+    this.es.supprimerEvenement(evennementAsupprimer).subscribe((res: any) => {
+      if (res?.count) {
+        this.updateEvents();
+      } else {
+        console.log('Erreur suppression Evennement');
+      }
+    });
   }
 
   updateEvents() {
@@ -64,15 +87,6 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
 
   openAddEventDialog() {
     const dialogRef = this.eventDialog.open(EvenementAjouterComponent);
-    dialogRef.afterClosed().subscribe(() => {
-      this.updateEvents();
-    });
-  }
-
-  openUpdateEventDialog(eventToUpdate: Evenement) {
-    const dialogRef = this.eventDialog.open(EvenementModifierComponent, {
-      data: eventToUpdate,
-    });
     dialogRef.afterClosed().subscribe(() => {
       this.updateEvents();
     });

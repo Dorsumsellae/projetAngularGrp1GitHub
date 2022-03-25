@@ -1,0 +1,25 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header class="event_future_header">
+    <mat-panel-title class="event_future_header_title">
+      {{evennement.id_evenement}} - {{evennement.Nom}}
+    </mat-panel-title>
+    <mat-panel-description class="event_future_header_description">
+      {{evennement.Jour | date : 'short' }}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-card-content>
+    <h3>
+      Lieu : {{this.ls.idLieuxToLieu(evennement.id_lieu, lieux).nom}}
+    </h3>
+    <p>Créé par {{this.stagS.idStagiaireToStagiaire(evennement.id_stagiaire,stagiaires).prenom}}
+      {{this.stagS.idStagiaireToStagiaire(evennement.id_stagiaire,stagiaires).nom}}</p>
+    <button mat-mini-fab color="accent" aria-label="Modifier l'évènement" class="event_future_header_description_button"
+      (click)="openUpdateEventDialog(evennement)">
+      <mat-icon>auto_fix_normal</mat-icon>
+    </button>
+    <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement" class="event_future_header_description_button"
+      (click)="onClickBoutonSupprimer(evennement)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-expansion-panel>

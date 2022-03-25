@@ -47,6 +47,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AProposComponent } from './components/a-propos/a-propos.component';
 import { LieuxComponent } from './components/lieux/lieux.component';
+import { EvennementDetailsComponent } from './components/evennement-details/evennement-details.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { LieuxComponent } from './components/lieux/lieux.component';
     HeaderComponent,
     AProposComponent,
     LieuxComponent,
+    EvennementDetailsComponent,
   ],
   imports: [
     BrowserModule,

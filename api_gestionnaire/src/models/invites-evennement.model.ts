@@ -14,6 +14,11 @@ export class Invites_evennement extends Entity {
   })
   id_evenement: number;
 
+  @property({
+    type: 'number',
+  })
+  status?: number;
+
   constructor(data?: Partial<Invites_evennement>) {
     super(data);
   }

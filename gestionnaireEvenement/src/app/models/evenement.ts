@@ -3,5 +3,6 @@ export interface Evenement {
   Nom: string;
   Jour: Date;
   id_lieu: number; //id_lieu
-  id_stagiaire: number; // id_propriétaire
+  id_stagiaire: number;
+  status: number; // id_propriétaire
 }
