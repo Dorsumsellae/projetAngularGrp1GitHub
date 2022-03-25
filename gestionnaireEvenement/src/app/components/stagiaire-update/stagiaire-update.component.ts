@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Stagiaire } from 'src/app/models/stagiaire';
 
 @Component({
@@ -9,10 +10,10 @@ import { Stagiaire } from 'src/app/models/stagiaire';
 })
 export class StagiaireUpdateComponent implements OnInit {
   formupdStag = new FormGroup({
-    nom: new FormControl('', Validators.required),
-    prenom: new FormControl(''),
-    telephone: new FormControl(''),
-    adresse: new FormControl(''),
+    nom: new FormControl(this.data.nom, Validators.required),
+    prenom: new FormControl(this.data.prenom),
+    telephone: new FormControl(this.data.telephone),
+    adresse: new FormControl(this.data.adresse),
   });
   stags: any;
 
@@ -32,7 +33,7 @@ export class StagiaireUpdateComponent implements OnInit {
       adresse: this.formupdStag.value.adresse,
     } as Stagiaire;
   }
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Stagiaire,) { }
 
   ngOnInit(): void {
   }
