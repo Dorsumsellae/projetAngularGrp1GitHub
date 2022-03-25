@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { Evenement } from 'src/app/models/evenement';
@@ -22,6 +29,9 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
 
   @Input()
   event!: Evenement;
+
+  @Output()
+  panelState: boolean = false;
 
   stagiaires!: Stagiaire[];
   eventsFuture!: Evenement[];
@@ -87,6 +97,14 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(() => {
       this.updateEvents();
     });
+  }
+
+  expandPanel() {
+    this.panelState = true;
+  }
+
+  collapsePanel() {
+    this.panelState = false;
   }
 
   constructor(

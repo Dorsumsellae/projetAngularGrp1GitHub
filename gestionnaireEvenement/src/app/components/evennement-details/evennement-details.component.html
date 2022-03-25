@@ -1,4 +1,4 @@
-<mat-expansion-panel>
+<mat-expansion-panel [expanded]="panelState">
   <mat-expansion-panel-header class="event_future_header">
     <mat-panel-title class="event_future_header_title">
       {{evennement.id_evenement}} - {{evennement.Nom}}
@@ -11,6 +11,9 @@
     <h3>
       Lieu : {{this.ls.idLieuxToLieu(evennement.id_lieu, lieux).nom}}
     </h3>
+    <p>
+      <span *ngFor="let invite of invites">{{invite.prenom}} {{invite.nom}}, </span>
+    </p>
     <p>Créé par {{this.stagS.idStagiaireToStagiaire(evennement.id_stagiaire,stagiaires).prenom}}
       {{this.stagS.idStagiaireToStagiaire(evennement.id_stagiaire,stagiaires).nom}}</p>
     <button mat-mini-fab color="accent" aria-label="Modifier l'évènement" class="event_future_header_description_button"

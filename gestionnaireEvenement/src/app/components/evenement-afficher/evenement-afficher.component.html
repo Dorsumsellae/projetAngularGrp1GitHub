@@ -6,11 +6,11 @@
     </button>
   </mat-card-title>
   <div class="example-action-buttons">
-    <button mat-button (click)="accordion.openAll()">Expand All</button>
-    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    <button mat-button (click)="expandPanel()">Expand All</button>
+    <button mat-button (click)="collapsePanel()">Collapse All</button>
   </div>
   <mat-accordion *ngFor="let event of eventsFuture" multi>
-    <app-evennement-details [evennement]="event" [stagiaires]="stagiaires" [lieux]="lieux"
+    <app-evennement-details [evennement]="event" [stagiaires]="stagiaires" [lieux]="lieux" [panelState]="panelState"
       (delEvennementEventEmitter)="traiterSuppressionEvennement(event)" (updateEvennementEventEmitter)="updateEvents()">
     </app-evennement-details>
   </mat-accordion>
