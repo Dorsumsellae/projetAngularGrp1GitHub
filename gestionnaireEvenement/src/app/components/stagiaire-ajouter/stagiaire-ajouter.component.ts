@@ -6,18 +6,15 @@ import { StagiaireService } from 'src/app/services/stagiaire.service';
 @Component({
   selector: 'app-stagiaire-ajouter',
   templateUrl: './stagiaire-ajouter.component.html',
-  styleUrls: ['./stagiaire-ajouter.component.scss']
+  styleUrls: ['./stagiaire-ajouter.component.scss'],
 })
 export class StagiaireAjouterComponent implements OnInit {
-
   formaddStag = new FormGroup({
     nom: new FormControl('', Validators.required),
     prenom: new FormControl(''),
     telephone: new FormControl(''),
     adresse: new FormControl(''),
-
   });
-
 
   addStag() {
     if (!this.formaddStag.invalid) {
@@ -25,7 +22,6 @@ export class StagiaireAjouterComponent implements OnInit {
       let stag = this.formValueToStag();
       console.log(stag);
       this.stags.addStagiaire(stag).subscribe();
-
     }
   }
 
@@ -38,10 +34,7 @@ export class StagiaireAjouterComponent implements OnInit {
     } as Stagiaire;
   }
 
+  constructor(private stags: StagiaireService) {}
 
-  constructor(private stags: StagiaireService) { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

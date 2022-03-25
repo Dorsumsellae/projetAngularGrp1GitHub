@@ -22,7 +22,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StagiaireComponent } from './components/stagiaire/stagiaire.component';
@@ -45,6 +46,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AProposComponent } from './components/a-propos/a-propos.component';
+import { LieuxComponent } from './components/lieux/lieux.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { AProposComponent } from './components/a-propos/a-propos.component';
     StagiaireUpdateComponent,
     FooterComponent,
     HeaderComponent,
-    AProposComponent
+    AProposComponent,
+    LieuxComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +87,8 @@ import { AProposComponent } from './components/a-propos/a-propos.component';
     MatDialogModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
@@ -101,4 +106,4 @@ import { AProposComponent } from './components/a-propos/a-propos.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

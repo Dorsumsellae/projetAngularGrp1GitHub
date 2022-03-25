@@ -24,6 +24,7 @@ export class InviteEvenementService {
    * @param invites_evenement
    * @returns tableau des identifiants des stagiaires invités
    */
+
   getGuestsOfEvent(
     id_evenement: number,
     invites_evenement: Invite_evennement[]

@@ -4,22 +4,22 @@
   <form [formGroup]="formaddStag" (submit)="addStag()">
     <mat-form-field class="name" appearance="fill">
       <mat-label for="nom">Nom</mat-label>
-      <input matInput type="text" nom="nom" formControlnom="nom">
+      <input matInput type="text" nom="nom" formControlName="nom">
     </mat-form-field>
 
     <mat-form-field class="name" appearance="fill">
       <mat-label for="prenom">Prenom</mat-label>
-      <input matInput type="text" prenom="nom" formControlprenom="prenom">
+      <input matInput type="text" prenom="nom" formControlName="prenom">
     </mat-form-field>
 
     <mat-form-field class="name" appearance="fill">
       <mat-label for="telephone">Téléphone</mat-label>
-      <input matInput type="text" telephone="telephone" formControltelephone="telephone">
+      <input matInput type="text" telephone="telephone" formControlName="telephone">
     </mat-form-field>
 
     <mat-form-field class="name" appearance="fill">
       <mat-label for="adresse">Adresse</mat-label>
-      <input matInput type="text" adresse="adresse" formControladresse="adresse">
+      <input matInput type="text" adresse="adresse" formControlName="adresse">
     </mat-form-field>
 
     <div class="submit-button-container">

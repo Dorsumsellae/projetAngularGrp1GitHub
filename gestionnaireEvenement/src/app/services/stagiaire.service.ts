@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Stagiaire } from '../models/stagiaire';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -8,15 +7,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class StagiaireService {
-
-
   stagiaireUrl = 'http://[::1]:3000/stagiaires/';
 
   private httpOptions = {
-    'headers': new HttpHeaders({ 'Content-type': 'application/json' })
-  }
+    headers: new HttpHeaders({ 'Content-type': 'application/json' }),
+  };
 
-  idStagiaireToStagiare(
+  idStagiaireToStagiaire(
     id_stagiaire: number,
     stagiaires: Stagiaire[]
   ): Stagiaire {
@@ -38,15 +35,19 @@ export class StagiaireService {
     return stagiaire;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   deleteStagiaire(stagiaireDelete: Stagiaire): Observable<any> {
-    return this.http.delete<Stagiaire[]>(this.stagiaireUrl + '/' + stagiaireDelete.id_stagiaire);
+    return this.http.delete<Stagiaire[]>(
+      this.stagiaireUrl + '/' + stagiaireDelete.id_stagiaire
+    );
   }
-
 
   addStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
     return this.http.post<Stagiaire>(this.stagiaireUrl, stagiaire);
   }
 
+  getStagiaire(): Observable<Stagiaire[]> {
+    return this.http.get<Stagiaire[]>(this.stagiaireUrl);
+  }
 }

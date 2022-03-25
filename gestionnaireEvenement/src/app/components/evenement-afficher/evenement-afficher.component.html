@@ -5,22 +5,26 @@
       <mat-icon>plus_one</mat-icon>
     </button>
   </mat-card-title>
-  <mat-accordion *ngFor="let event of eventsFuture">
+  <div class="example-action-buttons">
+    <button mat-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+  </div>
+  <mat-accordion *ngFor="let event of eventsFuture" multi>
     <mat-expansion-panel>
       <mat-expansion-panel-header class="event_future_header">
         <mat-panel-title class="event_future_header_title">
-          {{event.id}} - {{event.Nom}}
+          {{event.id_evenement}} - {{event.Nom}}
         </mat-panel-title>
         <mat-panel-description class="event_future_header_description">
           {{event.Jour | date : 'short' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-card-content>
-        <mat-list>
-          <mat-list-item>Lieu : {{event.id_lieu}}</mat-list-item>
-          <mat-divider></mat-divider>
-          <mat-list-item>Invités : {{event.id_stagiaire}}</mat-list-item>
-        </mat-list>
+        <h3>
+          Lieu : {{this.ls.idLieuxToLieu(event.id_lieu, lieux).nom}}
+        </h3>
+        <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
+          {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
         <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button"
           (click)="openUpdateEventDialog(event)">
           <mat-icon>auto_fix_normal</mat-icon>
@@ -38,12 +42,13 @@
       <div *ngFor="let event of eventsPast">
         <mat-card>
           <mat-card-title>
-            {{event.id}} - {{event.Nom}}
+            {{event.id_evenement}} - {{event.Nom}}
           </mat-card-title>
           <mat-card-content>
-            {{event.id_lieu}}
-            {{event.Jour | date : 'short' }}
-            {{event.id_stagiaire}}
+            <p> Lieu : {{this.ls.idLieuxToLieu(event.id_lieu, lieux).nom}}</p>
+            <p>Date : {{event.Jour | date : 'short' }}</p>
+            <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
+              {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
           </mat-card-content>
         </mat-card>
       </div>
