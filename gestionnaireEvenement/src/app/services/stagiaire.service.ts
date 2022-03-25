@@ -46,7 +46,7 @@ export class StagiaireService {
 
 
   addStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
-    return this.http.post<Stagiaire>(this.stagiaireURL, stagiaire);
+    return this.http.post<Stagiaire>(this.stagiaireUrl, stagiaire);
   }
 
 }
