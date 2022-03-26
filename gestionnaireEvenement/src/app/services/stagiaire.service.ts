@@ -43,10 +43,32 @@ export class StagiaireService {
     );
   }
 
+  /**
+   * function qui envoie un requete http pour mettre à jour un stagiaire
+   * @param stagiaire
+   * @returns observable de stagiaire
+   */
+  updateStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
+    return this.http.patch<Stagiaire>(
+      this.stagiaireUrl + '/' + stagiaire.id_stagiaire,
+      stagiaire
+    );
+  }
+
+  /**
+   * function qui envoie un requete http pour ajouter un stagiaire
+   * @param stagiaire
+   * @returns observable de stagiaire
+   */
+
   addStagiaire(stagiaire: Stagiaire): Observable<Stagiaire> {
     return this.http.post<Stagiaire>(this.stagiaireUrl, stagiaire);
   }
 
+  /**
+   * function qui envoie un requete http pour récupérer tous les stagiaires
+   * @returns observable de stagiaires
+   */
   getStagiaire(): Observable<Stagiaire[]> {
     return this.http.get<Stagiaire[]>(this.stagiaireUrl);
   }

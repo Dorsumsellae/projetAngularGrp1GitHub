@@ -20,6 +20,10 @@ export class LieuxComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
+  /**
+   * function qui met a jour la liste des lieux à partir de la BDD
+   */
+
   updateLieux() {
     this.ls.getLieux().subscribe((res: Lieux[]) => {
       this.lieux = res;
@@ -27,6 +31,9 @@ export class LieuxComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Ouvre un fenetre de dialogue pour ajouter un lieu
+   */
   openAddLieuDialog() {
     const dialogRef = this.dialog.open(LieuAjouterComponent);
     dialogRef.afterClosed().subscribe(() => {

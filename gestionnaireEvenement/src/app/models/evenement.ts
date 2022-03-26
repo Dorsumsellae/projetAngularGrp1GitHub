@@ -4,5 +4,5 @@ export interface Evenement {
   Jour: Date;
   id_lieu: number; //id_lieu
   id_stagiaire: number; // id_propriétaire
-  status: number;
+  status: number; // 0: supprimé, 1: créé
 }

@@ -13,19 +13,23 @@ export class StagiaireAjouterComponent implements OnInit {
     nom: new FormControl('', Validators.required),
     prenom: new FormControl(''),
     telephone: new FormControl(''),
-    adresse: new FormControl(''),
+    adresse: new FormControl('', Validators.email),
   });
 
+  /**
+   * Fonction qui ajoute un stagiaire a la base de donnée et qui réinitialise le formulaire
+   */
   addStag() {
     if (!this.formaddStag.invalid) {
-      console.log(this.formaddStag.value);
       let stag = this.formValueToStag();
-      console.log(stag);
       this.stags.addStagiaire(stag).subscribe();
       this.formaddStag.reset();
     }
   }
-
+  /**
+   * Transforme les valeurs du formulaire en stagiaire
+   * @returns stagiaire
+   */
   formValueToStag(): Stagiaire {
     return {
       nom: this.formaddStag.value.nom,

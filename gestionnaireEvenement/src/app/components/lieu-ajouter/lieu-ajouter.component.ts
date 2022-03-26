@@ -27,7 +27,7 @@ export class LieuAjouterComponent implements OnInit {
   longitude!: any;
 
   /**
-   * Traiter le formulaire pour ajouter un lieu.
+   * Traiter le formulaire pour ajouter un lieu à la BDD.
    */
   traiterFormulaire() {
     if (!this.formAddLieux.invalid) {
@@ -38,6 +38,7 @@ export class LieuAjouterComponent implements OnInit {
 
   /**
    * Retourne un objet Lieux fabriqué à partir des données du form.
+   * @returns Lieu
    **/
   formValueVersLieux(): Lieux {
     return {

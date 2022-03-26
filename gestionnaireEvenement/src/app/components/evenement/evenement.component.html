@@ -1,1 +1,9 @@
-<p>evenement works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{nextEvent.Nom}}</mat-card-title>
+    <mat-card-subtitle>{{nextEvent.Jour | date}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Se déroulera à : {{this.ls.idLieuxToLieu(nextEvent.id_lieu, this.lieux)}}</p>
+  </mat-card-content>
+</mat-card>

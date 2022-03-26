@@ -39,12 +39,19 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   lieux!: Lieux[];
   guestsOfEvents!: Invite_evennement[];
 
+  /**
+   * function qui met à jour la liste des stagiaires
+   */
   updateStagiaires() {
     this.stagS
       .getStagiaire()
       .subscribe((stagiaires: Stagiaire[]) => (this.stagiaires = stagiaires));
     console.log('update personne');
   }
+
+  /**
+   * fonction qui met à jour la liste des evenements
+   */
 
   updateEvents() {
     this.eventsFuture = [];
@@ -66,6 +73,10 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * mets à jour la liste des invités aux evenements
+   */
+
   updateGuests() {
     this.gs
       .getInviteEvenement()
@@ -76,12 +87,19 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     console.log('update invités');
   }
 
+  /**
+   * fonction qui met à jour la liste des lieux
+   */
   updateLieux() {
     this.ls.getLieux().subscribe((res: Lieux[]) => {
       this.lieux = res;
     });
   }
 
+  /**
+   * fonction qui supprime un evenement de la base de donnée
+   * @param evennementAsupprimer
+   */
   traiterSuppressionEvennement(evennementAsupprimer: Evenement): void {
     evennementAsupprimer.status = 0;
     this.es.supprimerEvenement(evennementAsupprimer).subscribe(() => {
@@ -90,19 +108,31 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * ouvre une fenetre de dialogue pour ajouter un evenement
+   * @param lieux
+   * @param stagiaires
+   */
   openAddEventDialog(lieux: Lieux[], stagiaires: Stagiaire[]) {
     const dialogRef = this.eventDialog.open(EvenementAjouterComponent, {
       data: { lieux, stagiaires },
     });
     dialogRef.afterClosed().subscribe(() => {
       this.updateEvents();
+      this.updateGuests();
     });
   }
 
+  /**
+   * fuction qui ouvre tous les evenements à venir
+   */
   expandPanel() {
     this.panelState = true;
   }
 
+  /**
+   * fuction qui ferme tous les evenements à venir
+   */
   collapsePanel() {
     this.panelState = false;
   }

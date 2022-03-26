@@ -43,9 +43,16 @@ export class LieuService {
     );
   }
 
-  countEvenement(): Observable<any> {
+  countLieux(): Observable<any> {
     return this.http.get<Lieux>(this.lieuUrl + '/count');
   }
+
+  /**
+   * Transforme l'id_lieu en lieu
+   * @param id_lieu
+   * @param lieuxArray
+   * @returns
+   */
 
   idLieuxToLieu(id_lieu: number, lieuxArray: Lieux[]): Lieux {
     let lieu: Lieux;

@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Invite_evennement } from '../models/invite_evennement';
@@ -50,8 +50,14 @@ export class InviteEvenementService {
     return this.http.post(this.invites_evenementUrl, invite_evenement);
   }
 
+  /**
+   * Mets à jour le status de l'invité_évènement
+   * @param invite_evenement
+   * @returns
+   */
   supprimerEvenement(invite_evenement: Invite_evennement) {
-    return this.http.delete(
+    invite_evenement.status = 0;
+    return this.http.patch(
       this.invites_evenementUrl + '/' + invite_evenement.id_stagiaire,
       {
         body: invite_evenement,
