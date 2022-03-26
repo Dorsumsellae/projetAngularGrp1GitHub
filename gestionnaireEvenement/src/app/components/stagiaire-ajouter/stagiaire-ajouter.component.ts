@@ -22,6 +22,7 @@ export class StagiaireAjouterComponent implements OnInit {
       let stag = this.formValueToStag();
       console.log(stag);
       this.stags.addStagiaire(stag).subscribe();
+      this.formaddStag.reset();
     }
   }
 

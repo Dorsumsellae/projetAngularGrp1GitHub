@@ -6,13 +6,12 @@ import { StagiaireUpdateComponent } from '../stagiaire-update/stagiaire-update.c
 @Component({
   selector: 'app-stagiaire-details',
   templateUrl: './stagiaire-details.component.html',
-  styleUrls: ['./stagiaire-details.component.scss']
+  styleUrls: ['./stagiaire-details.component.scss'],
 })
 export class StagiaireDetailsComponent implements OnInit {
+  @Input() numero!: Number;
 
-  @Input() numero !: Number;
-
-  @Input() stagiaire !: Stagiaire;
+  @Input() stagiaire!: Stagiaire;
 
   @Output()
   deleteStagiaireEvent = new EventEmitter<Stagiaire>();
@@ -25,18 +24,18 @@ export class StagiaireDetailsComponent implements OnInit {
       data: stagiaireToUpdate,
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.updateStagiaireEvent.emit(stagiaireToUpdate)
+      this.updateStagiaireEvent.emit(stagiaireToUpdate);
     });
   }
 
-  constructor(private stag: StagiaireService, public stagiareDialog: MatDialog) { }
+  constructor(
+    private stag: StagiaireService,
+    public stagiareDialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   traiterBoutonDelete(stag: Stagiaire) {
-    //this.ps.supprimerPersonne(p);
     this.deleteStagiaireEvent.emit(stag);
   }
 }

@@ -1,4 +1,11 @@
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { Evenement } from 'src/app/models/evenement';
@@ -10,7 +17,6 @@ import { InviteEvenementService } from 'src/app/services/invite-evenement.servic
 import { LieuService } from 'src/app/services/lieu.service';
 import { StagiaireService } from 'src/app/services/stagiaire.service';
 import { EvenementAjouterComponent } from '../evenement-ajouter/evenement-ajouter.component';
-import { EvenementModifierComponent } from '../evenement-modifier/evenement-modifier.component';
 
 @Component({
   selector: 'app-evenement-afficher',
@@ -21,9 +27,15 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
 
+  @Input()
+  event!: Evenement;
+
+  @Output()
+  panelState: boolean = false;
+
+  stagiaires!: Stagiaire[];
   eventsFuture!: Evenement[];
   eventsPast!: Evenement[];
-  stagiaires!: Stagiaire[];
   lieux!: Lieux[];
   guestsOfEvents!: Invite_evennement[];
 
@@ -40,10 +52,12 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
 
     this.es.getEvenement().subscribe((res) => {
       res.forEach((evenement) => {
-        if (new Date(evenement.Jour) > new Date(Date.now())) {
-          this.eventsFuture.push(evenement);
-        } else {
-          this.eventsPast.push(evenement);
+        if (evenement.status == 1) {
+          if (new Date(evenement.Jour) > new Date(Date.now())) {
+            this.eventsFuture.push(evenement);
+          } else {
+            this.eventsPast.push(evenement);
+          }
         }
       });
       this.ls.getLieux().subscribe((res: Lieux[]) => {
@@ -62,20 +76,35 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     console.log('update invités');
   }
 
-  openAddEventDialog() {
-    const dialogRef = this.eventDialog.open(EvenementAjouterComponent);
+  updateLieux() {
+    this.ls.getLieux().subscribe((res: Lieux[]) => {
+      this.lieux = res;
+    });
+  }
+
+  traiterSuppressionEvennement(evennementAsupprimer: Evenement): void {
+    evennementAsupprimer.status = 0;
+    this.es.supprimerEvenement(evennementAsupprimer).subscribe(() => {
+      this.updateEvents();
+      console.log('Erreur suppression Evennement');
+    });
+  }
+
+  openAddEventDialog(lieux: Lieux[], stagiaires: Stagiaire[]) {
+    const dialogRef = this.eventDialog.open(EvenementAjouterComponent, {
+      data: { lieux, stagiaires },
+    });
     dialogRef.afterClosed().subscribe(() => {
       this.updateEvents();
     });
   }
 
-  openUpdateEventDialog(eventToUpdate: Evenement) {
-    const dialogRef = this.eventDialog.open(EvenementModifierComponent, {
-      data: eventToUpdate,
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      this.updateEvents();
-    });
+  expandPanel() {
+    this.panelState = true;
+  }
+
+  collapsePanel() {
+    this.panelState = false;
   }
 
   constructor(
@@ -88,6 +117,7 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     this.updateGuests();
     this.updateStagiaires();
     this.updateEvents();
+    this.updateLieux();
   }
 
   ngOnInit(): void {}

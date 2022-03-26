@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LIEUX } from 'src/app/mocks/lieux';
 import { Lieux } from 'src/app/models/lieux';
 import { LieuService } from 'src/app/services/lieu.service';
+import { LieuAjouterComponent } from '../lieu-ajouter/lieu-ajouter.component';
 
 @Component({
   selector: 'app-lieux',
@@ -25,7 +27,14 @@ export class LieuxComponent implements OnInit, AfterViewInit {
     });
   }
 
-  constructor(private ls: LieuService) {
+  openAddLieuDialog() {
+    const dialogRef = this.dialog.open(LieuAjouterComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.updateLieux();
+    });
+  }
+
+  constructor(private ls: LieuService, public dialog: MatDialog) {
     this.updateLieux();
   }
 

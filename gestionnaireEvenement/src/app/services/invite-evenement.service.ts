@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Invite_evennement } from '../models/invite_evennement';
@@ -36,6 +36,11 @@ export class InviteEvenementService {
     return guestsOfEvent;
   }
 
+  getGuestsOfEventv(id_evenement: number) {
+    return this.http.get<Invite_evennement[]>(
+      this.invites_evenementUrl + '?filter[]'
+    );
+  }
   /**
    * Post un invité_évènement
    * @param invite_evenement

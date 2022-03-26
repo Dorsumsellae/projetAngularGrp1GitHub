@@ -1,36 +1,18 @@
 <mat-card>
   <mat-card-title>
     Evenements à venir
-    <button mat-fab aria-label="Ajouter un évènement" (click)="openAddEventDialog()">
+    <button mat-fab aria-label="Ajouter un évènement" (click)="openAddEventDialog(lieux, stagiaires)">
       <mat-icon>plus_one</mat-icon>
     </button>
   </mat-card-title>
   <div class="example-action-buttons">
-    <button mat-button (click)="accordion.openAll()">Expand All</button>
-    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    <button mat-button (click)="expandPanel()">Expand All</button>
+    <button mat-button (click)="collapsePanel()">Collapse All</button>
   </div>
   <mat-accordion *ngFor="let event of eventsFuture" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header class="event_future_header">
-        <mat-panel-title class="event_future_header_title">
-          {{event.id_evenement}} - {{event.Nom}}
-        </mat-panel-title>
-        <mat-panel-description class="event_future_header_description">
-          {{event.Jour | date : 'short' }}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-card-content>
-        <h3>
-          Lieu : {{this.ls.idLieuxToLieu(event.id_lieu, lieux).nom}}
-        </h3>
-        <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
-          {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
-        <button mat-mini-fab aria-label="Modifier l'évènement" class="event_future_header_description_button"
-          (click)="openUpdateEventDialog(event)">
-          <mat-icon>auto_fix_normal</mat-icon>
-        </button>
-      </mat-card-content>
-    </mat-expansion-panel>
+    <app-evennement-details [evennement]="event" [stagiaires]="stagiaires" [lieux]="lieux" [panelState]="panelState"
+      (delEvennementEventEmitter)="traiterSuppressionEvennement(event)" (updateEvennementEventEmitter)="updateEvents()">
+    </app-evennement-details>
   </mat-accordion>
   <mat-accordion>
     <mat-expansion-panel>

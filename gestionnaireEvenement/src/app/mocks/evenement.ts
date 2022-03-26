@@ -7,6 +7,7 @@ export const EVENEMENTS: Evenement[] = [
     Jour: new Date('2022-03-27'),
     id_lieu: 2,
     id_stagiaire: 2,
+    status: 1,
   },
   {
     id_evenement: 1,
@@ -14,6 +15,7 @@ export const EVENEMENTS: Evenement[] = [
     Jour: new Date('2022-04-04'),
     id_lieu: 2,
     id_stagiaire: 1,
+    status: 1,
   },
   {
     id_evenement: 2,
@@ -21,6 +23,7 @@ export const EVENEMENTS: Evenement[] = [
     Jour: new Date('2022-04-05'),
     id_lieu: 3,
     id_stagiaire: 2,
+    status: 1,
   },
   {
     id_evenement: 3,
@@ -28,6 +31,7 @@ export const EVENEMENTS: Evenement[] = [
     Jour: new Date('2022-05-05'),
     id_lieu: 1,
     id_stagiaire: 3,
+    status: 1,
   },
   {
     id_evenement: 4,
@@ -35,5 +39,6 @@ export const EVENEMENTS: Evenement[] = [
     Jour: new Date('2022-06-05'),
     id_lieu: 4,
     id_stagiaire: 4,
+    status: 1,
   },
 ];
