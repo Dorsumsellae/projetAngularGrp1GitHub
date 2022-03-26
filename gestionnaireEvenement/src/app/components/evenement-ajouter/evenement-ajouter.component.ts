@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Evenement } from 'src/app/models/evenement';
@@ -14,12 +21,12 @@ import { LieuService } from 'src/app/services/lieu.service';
   templateUrl: './evenement-ajouter.component.html',
   styleUrls: ['./evenement-ajouter.component.scss'],
 })
-export class EvenementAjouterComponent implements OnInit {
+export class EvenementAjouterComponent implements OnInit, OnChanges {
   @Output()
   $addLieuEventEmitter = new EventEmitter<Lieux>();
 
   stagiaires: Stagiaire[] = this.data.stagiaires;
-  lieux: Lieux[] = [];
+  lieux: Lieux[] = this.data.lieux;
 
   formAddEvent = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -40,6 +47,9 @@ export class EvenementAjouterComponent implements OnInit {
 
   addLieu(lieu: Lieux) {
     this.$addLieuEventEmitter.emit(lieu);
+    this.ls.getLieux().subscribe((res) => {
+      this.lieux = res;
+    });
   }
 
   formValueToEvent(): Evenement {
@@ -79,6 +89,9 @@ export class EvenementAjouterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateLieu();
+  }
+  ngOnChanges() {
     this.updateLieu();
   }
 }

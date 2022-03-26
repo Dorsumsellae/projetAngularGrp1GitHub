@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { Evenement } from 'src/app/models/evenement';
 import { Invite_evennement } from 'src/app/models/invite_evennement';
@@ -38,6 +38,8 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   eventsPast!: Evenement[];
   lieux!: Lieux[];
   guestsOfEvents!: Invite_evennement[];
+
+  private dialogRef!: MatDialogRef<EvenementAjouterComponent>;
 
   /**
    * function qui met à jour la liste des stagiaires
@@ -93,6 +95,7 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   updateLieux() {
     this.ls.getLieux().subscribe((res: Lieux[]) => {
       this.lieux = res;
+      this.eventDialog.closeAll();
     });
   }
 
@@ -114,10 +117,10 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
    * @param stagiaires
    */
   openAddEventDialog(lieux: Lieux[], stagiaires: Stagiaire[]) {
-    const dialogRef = this.eventDialog.open(EvenementAjouterComponent, {
+    this.dialogRef = this.eventDialog.open(EvenementAjouterComponent, {
       data: { lieux, stagiaires },
     });
-    dialogRef.afterClosed().subscribe(() => {
+    this.dialogRef.afterClosed().subscribe(() => {
       this.updateEvents();
       this.updateGuests();
     });
