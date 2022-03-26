@@ -23,7 +23,7 @@
     </mat-form-field>
 
     <div class="submit-button-container">
-      <button mat-fab color="primary" [disabled]="this.formaddStag.invalid" type="submit">
+      <button [mat-dialog-close]="true" mat-fab color="primary" [disabled]="this.formaddStag.invalid" type="submit">
         <mat-icon>done</mat-icon>
       </button>
     </div>
