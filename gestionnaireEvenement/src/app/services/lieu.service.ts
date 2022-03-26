@@ -56,7 +56,10 @@ export class LieuService {
 
   idLieuxToLieu(id_lieu: number, lieuxArray: Lieux[]): Lieux {
     let lieu: Lieux;
-    let result = lieuxArray.find((lieu: Lieux) => lieu.id_lieu == id_lieu);
+    if (id_lieu == undefined) {
+      id_lieu = -1;
+    }
+    let result = lieuxArray?.find((lieu: Lieux) => lieu.id_lieu == id_lieu);
     if (result == undefined) {
       lieu = {
         id_lieu: -1,

@@ -1,10 +1,3 @@
 <app-header></app-header>
 <app-menu></app-menu>
-<app-lieux></app-lieux>
 <app-footer></app-footer>
-<div>
-  <label>Enter address</label>
-  <input type="text" class="my-search-box" (keydown.enter)="$event.preventDefault()" placeholder="Search Location"
-    type="text" #search />
-</div>
-<google-map #myGoogleMap height="500px" width="100%" [zoom]="zoom" [center]="center" [options]="options"></google-map>

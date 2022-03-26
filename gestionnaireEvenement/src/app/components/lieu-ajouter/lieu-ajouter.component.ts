@@ -15,16 +15,17 @@ import { LieuService } from 'src/app/services/lieu.service';
   styleUrls: ['./lieu-ajouter.component.scss'],
 })
 export class LieuAjouterComponent implements OnInit {
-  formAddLieux = new FormGroup({
-    nom: new FormControl('', Validators.required),
-    adresse: new FormControl(''),
-  });
-
   @ViewChild('search')
   public searchElementRef!: ElementRef;
 
   latitude!: any;
   longitude!: any;
+  adresse!: string;
+
+  formAddLieux = new FormGroup({
+    nom: new FormControl('', Validators.required),
+    adresse: new FormControl(''),
+  });
 
   /**
    * Traiter le formulaire pour ajouter un lieu à la BDD.
@@ -43,7 +44,7 @@ export class LieuAjouterComponent implements OnInit {
   formValueVersLieux(): Lieux {
     return {
       nom: this.formAddLieux.value.nom,
-      adresse: this.formAddLieux.value.adresse,
+      adresse: this.adresse,
     } as Lieux;
   }
 
@@ -72,8 +73,7 @@ export class LieuAjouterComponent implements OnInit {
         this.latitude = place.geometry.location?.lat();
         this.longitude = place.geometry.location?.lng();
         if (!(place.formatted_address === undefined)) {
-          this.formAddLieux.value.addresse =
-            place.formatted_address?.toString();
+          this.adresse = place.formatted_address;
         }
       });
     });
