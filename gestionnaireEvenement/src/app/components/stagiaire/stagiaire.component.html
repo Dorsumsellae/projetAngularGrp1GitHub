@@ -4,6 +4,7 @@
 </button>
 <div *ngFor="let stagiaire of stagiaires; index as i">
   <app-stagiaire-details (click)="afficherInfoStagiaire(stagiaire)"
-    (deleteStagiaireEvent)="traiterSuppressionStagiaire($event)" [stagiaire]="stagiaire" [numero]="i">
+    (deleteStagiaireEvent)="traiterSuppressionStagiaire($event)" (updateStagiaireEvent)="updateStagiaires()"
+    [stagiaire]="stagiaire" [numero]="i">
   </app-stagiaire-details>
 </div>

@@ -50,6 +50,7 @@ import { AProposComponent } from './components/a-propos/a-propos.component';
 import { LieuxComponent } from './components/lieux/lieux.component';
 import { EvennementDetailsComponent } from './components/evennement-details/evennement-details.component';
 import { LieuAjouterComponent } from './components/lieu-ajouter/lieu-ajouter.component';
+import { LieuModifierComponent } from './components/lieu-modifier/lieu-modifier.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { LieuAjouterComponent } from './components/lieu-ajouter/lieu-ajouter.com
     LieuxComponent,
     EvennementDetailsComponent,
     LieuAjouterComponent,
+    LieuModifierComponent,
   ],
   imports: [
     BrowserModule,

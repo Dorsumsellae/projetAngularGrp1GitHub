@@ -1,4 +1,18 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,22 +22,39 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Lieux } from 'src/app/models/lieux';
 import { LieuService } from 'src/app/services/lieu.service';
 import { LieuAjouterComponent } from '../lieu-ajouter/lieu-ajouter.component';
+import { LieuModifierComponent } from '../lieu-modifier/lieu-modifier.component';
 
 @Component({
   selector: 'app-lieux',
   templateUrl: './lieux.component.html',
   styleUrls: ['./lieux.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
 export class LieuxComponent implements OnInit, AfterViewInit {
   lieux: Lieux[] = [];
-  displayedColumns: string[] = ['ID', 'Nom', 'Adresse'];
+  displayedColumns: string[] = ['id_lieu', 'nom', 'adresse'];
   dataSource = new MatTableDataSource<Lieux>(this.lieux);
   isLoadingResults = true;
-  isRateLimitReached = false;
   resultsLength = 0;
+  expandedElement!: Lieux | null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort = new MatSort();
+  @ViewChild(MatSort, { static: false }) sort!: MatSort;
+
+  @Output()
+  $addLieuEventEmitter = new EventEmitter<Lieux>();
+
+  @Output()
+  $editLieuEventEmitter = new EventEmitter<Lieux>();
 
   /**
    * function qui met a jour la liste des lieux à partir de la BDD
@@ -52,19 +83,42 @@ export class LieuxComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(LieuAjouterComponent);
     dialogRef.afterClosed().subscribe(() => {
       this.updateLieux();
+      this.$addLieuEventEmitter.emit();
+    });
+  }
+
+  /**
+   * Ouvre une fenetre de dialogue pour modifier un lieu
+   * @param lieu
+   */
+  openEditLieuDialog(lieu: Lieux) {
+    const dialogRef = this.dialog.open(LieuModifierComponent, {
+      data: lieu,
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.updateLieux();
+      this.$editLieuEventEmitter.emit();
+    });
+  }
+
+  /**
+   * function qui supprime un lieu
+   * @param lieu
+   */
+  deleteLieu(lieu: Lieux) {
+    this.ls.supprimerLieu(lieu).subscribe(() => {
+      this.updateLieux();
     });
   }
 
   constructor(private ls: LieuService, public dialog: MatDialog) {
-    this.updateLieux();
+    //this.updateLieux();
   }
 
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
+    console.log(this.sort);
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -78,7 +132,6 @@ export class LieuxComponent implements OnInit, AfterViewInit {
         map((data) => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
-          this.isRateLimitReached = data === null;
 
           if (data === null) {
             return [];
@@ -93,6 +146,9 @@ export class LieuxComponent implements OnInit, AfterViewInit {
       )
       .subscribe((data: Lieux[]) => {
         this.lieux = data;
+        this.dataSource = new MatTableDataSource<Lieux>(this.lieux);
+        this.dataSource.sort = this.sort;
+        console.log('dataSource sort', this.dataSource.sort);
       });
   }
 }

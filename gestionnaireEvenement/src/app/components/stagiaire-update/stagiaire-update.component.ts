@@ -14,7 +14,7 @@ export class StagiaireUpdateComponent implements OnInit {
     nom: new FormControl(this.data.nom, Validators.required),
     prenom: new FormControl(this.data.prenom),
     telephone: new FormControl(this.data.telephone),
-    adresse: new FormControl(this.data.adresse),
+    adresse: new FormControl(this.data.adresse, Validators.email),
   });
 
   /**
@@ -37,6 +37,7 @@ export class StagiaireUpdateComponent implements OnInit {
       prenom: this.formupdStag.value.prenom,
       telephone: this.formupdStag.value.telephone,
       adresse: this.formupdStag.value.adresse,
+      id_stagiaire: this.data.id_stagiaire,
     } as Stagiaire;
   }
   constructor(

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Evenement } from 'src/app/models/evenement';
@@ -7,6 +7,7 @@ import { Lieux } from 'src/app/models/lieux';
 import { Stagiaire } from 'src/app/models/stagiaire';
 import { EvenementService } from 'src/app/services/evenement.service';
 import { InviteEvenementService } from 'src/app/services/invite-evenement.service';
+import { LieuService } from 'src/app/services/lieu.service';
 
 @Component({
   selector: 'app-evenement-ajouter',
@@ -14,8 +15,11 @@ import { InviteEvenementService } from 'src/app/services/invite-evenement.servic
   styleUrls: ['./evenement-ajouter.component.scss'],
 })
 export class EvenementAjouterComponent implements OnInit {
+  @Output()
+  $addLieuEventEmitter = new EventEmitter<Lieux>();
+
   stagiaires: Stagiaire[] = this.data.stagiaires;
-  lieux: Lieux[] = this.data.lieux;
+  lieux: Lieux[] = [];
 
   formAddEvent = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -32,6 +36,10 @@ export class EvenementAjouterComponent implements OnInit {
         this.formValueToInvites(res.id_evenement);
       });
     }
+  }
+
+  addLieu(lieu: Lieux) {
+    this.$addLieuEventEmitter.emit(lieu);
   }
 
   formValueToEvent(): Evenement {
@@ -54,12 +62,23 @@ export class EvenementAjouterComponent implements OnInit {
     });
   }
 
+  updateLieu() {
+    this.ls.getLieux().subscribe((res) => {
+      this.lieux = res;
+    });
+  }
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: { lieux: Lieux[]; stagiaires: Stagiaire[] },
     private es: EvenementService,
-    private ies: InviteEvenementService
-  ) {}
+    private ies: InviteEvenementService,
+    private ls: LieuService
+  ) {
+    this.updateLieu();
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updateLieu();
+  }
 }

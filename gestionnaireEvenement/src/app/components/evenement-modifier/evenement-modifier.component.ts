@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LIEUX } from 'src/app/mocks/lieux';
-import { STAGIAIRES } from 'src/app/mocks/stagiaires';
 import { Evenement } from 'src/app/models/evenement';
 import { Lieux } from 'src/app/models/lieux';
 import { Stagiaire } from 'src/app/models/stagiaire';
 import { EvenementService } from 'src/app/services/evenement.service';
+import { LieuService } from 'src/app/services/lieu.service';
+import { StagiaireService } from 'src/app/services/stagiaire.service';
 
 @Component({
   selector: 'app-evenement-modifier',
@@ -14,8 +14,8 @@ import { EvenementService } from 'src/app/services/evenement.service';
   styleUrls: ['./evenement-modifier.component.scss'],
 })
 export class EvenementModifierComponent implements OnInit {
-  stagiaires: Stagiaire[] = STAGIAIRES;
-  lieux: Lieux[] = LIEUX;
+  stagiaires: Stagiaire[] = [];
+  lieux: Lieux[] = [];
 
   formUpdateEvent = new FormGroup({
     name: new FormControl(this.data.Nom, Validators.required),
@@ -35,6 +35,18 @@ export class EvenementModifierComponent implements OnInit {
     }
   }
 
+  updateLieu() {
+    this.ls.getLieux().subscribe((res) => {
+      this.lieux = res;
+    });
+  }
+
+  updateStagiaire() {
+    this.stagS.getStagiaire().subscribe((res) => {
+      this.stagiaires = res;
+    });
+  }
+
   formValueToEvent(): Evenement {
     return {
       Nom: this.formUpdateEvent.value.name,
@@ -47,8 +59,13 @@ export class EvenementModifierComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Evenement,
-    private es: EvenementService
-  ) {}
+    private es: EvenementService,
+    private ls: LieuService,
+    private stagS: StagiaireService
+  ) {
+    this.updateLieu();
+    this.updateStagiaire();
+  }
 
   ngOnInit(): void {}
 }

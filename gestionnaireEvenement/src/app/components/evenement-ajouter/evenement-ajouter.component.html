@@ -44,7 +44,7 @@
       </button>
     </div>
   </form>
-  <app-lieux></app-lieux>
+  <app-lieux ($addLieuEventEmitter)="addLieu($event)"></app-lieux>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
