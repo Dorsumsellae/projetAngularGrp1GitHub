@@ -1,1 +1,32 @@
-<p>stagiaire-update works!</p>
+<h2 mat-dialog-title>Mettre à jour un stagiaire</h2>
+
+<div class="mat-typography">
+  <form [formGroup]="formupdStag" (submit)="updStag()">
+    <mat-form-field class="name" appearance="fill">
+      <mat-label for="nom">Nom</mat-label>
+      <input matInput type="text" nom="nom" formControlName="nom">
+    </mat-form-field>
+
+    <mat-form-field class="name" appearance="fill">
+      <mat-label for="prenom">Prenom</mat-label>
+      <input matInput type="text" prenom="nom" formControlName="prenom">
+    </mat-form-field>
+
+    <mat-form-field class="name" appearance="fill">
+      <mat-label for="telephone">Téléphone</mat-label>
+      <input matInput type="text" telephone="telephone" formControlName="telephone">
+    </mat-form-field>
+
+    <mat-form-field class="name" appearance="fill">
+      <mat-label for="adresse">Adresse</mat-label>
+      <input matInput type="text" adresse="adresse" formControlName="adresse">
+    </mat-form-field>
+
+    <div class="submit-button-container">
+      <button mat-fab color="primary" [disabled]="this.formupdStag.invalid" type="submit">
+        <mat-icon>done</mat-icon>
+      </button>
+    </div>
+
+  </form>
+</div>
