@@ -15,11 +15,12 @@ export class AppComponent {
   @ViewChild(GoogleMap)
   public map!: GoogleMap;
 
-  zoom = 12;
+  address!: string | undefined;
+  zoom = 15;
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     zoomControl: true,
-    scrollwheel: false,
+    scrollwheel: true,
     disableDefaultUI: true,
     fullscreenControl: true,
     disableDoubleClickZoom: true,
@@ -56,6 +57,9 @@ export class AppComponent {
         //set latitude, longitude and zoom
         this.latitude = place.geometry.location?.lat();
         this.longitude = place.geometry.location?.lng();
+        this.address = place.formatted_address?.toString();
+        console.log(this.address);
+
         this.center = {
           lat: this.latitude,
           lng: this.longitude,

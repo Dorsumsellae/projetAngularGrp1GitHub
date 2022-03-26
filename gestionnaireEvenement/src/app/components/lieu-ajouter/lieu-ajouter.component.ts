@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Lieux } from 'src/app/models/lieux';
 import { LieuService } from 'src/app/services/lieu.service';
@@ -13,6 +19,12 @@ export class LieuAjouterComponent implements OnInit {
     nom: new FormControl('', Validators.required),
     adresse: new FormControl(''),
   });
+
+  @ViewChild('search')
+  public searchElementRef!: ElementRef;
+
+  latitude!: any;
+  longitude!: any;
 
   /**
    * Traiter le formulaire pour ajouter un lieu.
@@ -34,7 +46,35 @@ export class LieuAjouterComponent implements OnInit {
     } as Lieux;
   }
 
-  constructor(private ls: LieuService) {}
+  constructor(private ls: LieuService, private ngZone: NgZone) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    // Binding autocomplete to search input control
+    let autocomplete = new google.maps.places.Autocomplete(
+      this.searchElementRef.nativeElement
+    );
+    autocomplete.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        //get the place result
+        let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+        //verify result
+        if (place.geometry === undefined || place.geometry === null) {
+          return;
+        }
+
+        console.log({ place }, place.geometry.location?.lat());
+
+        //set latitude, longitude and zoom
+        this.latitude = place.geometry.location?.lat();
+        this.longitude = place.geometry.location?.lng();
+        if (!(place.formatted_address === undefined)) {
+          this.formAddLieux.value.addresse =
+            place.formatted_address?.toString();
+        }
+      });
+    });
+  }
 }
