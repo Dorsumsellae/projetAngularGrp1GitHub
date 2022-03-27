@@ -1,4 +1,5 @@
-<form [formGroup]="formAddLieux" (submit)="traiterFormulaire()">
+<h2 mat-dialog-title>Modifier le lieu</h2>
+<form [formGroup]="editLieuForm" (submit)="updateLieu()">
   <mat-form-field class="name" appearance="fill">
     <mat-label for="nom">Nom</mat-label>
     <input matInput type="text" name="nom" formControlName="nom">
@@ -11,7 +12,7 @@
   </mat-form-field>
 
   <div dir="rtl" class="submit-button-container">
-    <button [mat-dialog-close]="true" mat-fab color="primary" [disabled]="this.formAddLieux.invalid" type="submit">
+    <button [mat-dialog-close]="true" mat-fab color="primary" [disabled]="this.editLieuForm.invalid" type="submit">
       <mat-icon>done</mat-icon>
     </button>
   </div>

@@ -1,20 +1,22 @@
 import {
   Component,
   ElementRef,
+  Inject,
   NgZone,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Lieux } from 'src/app/models/lieux';
 import { LieuService } from 'src/app/services/lieu.service';
 
 @Component({
-  selector: 'app-lieu-ajouter',
-  templateUrl: './lieu-ajouter.component.html',
-  styleUrls: ['./lieu-ajouter.component.scss'],
+  selector: 'app-lieu-modifier',
+  templateUrl: './lieu-modifier.component.html',
+  styleUrls: ['./lieu-modifier.component.scss'],
 })
-export class LieuAjouterComponent implements OnInit {
+export class LieuModifierComponent implements OnInit {
   @ViewChild('search')
   public searchElementRef!: ElementRef;
 
@@ -22,33 +24,39 @@ export class LieuAjouterComponent implements OnInit {
   longitude!: any;
   adresse!: string;
 
-  formAddLieux = new FormGroup({
-    nom: new FormControl('', Validators.required),
-    adresse: new FormControl(''),
+  editLieuForm = new FormGroup({
+    nom: new FormControl(this.data.nom, Validators.required),
+    adresse: new FormControl(this.data.adresse, Validators.required),
   });
 
   /**
-   * Traiter le formulaire pour ajouter un lieu à la BDD.
+   * function qui transform les formValue en lieux
    */
-  traiterFormulaire() {
-    if (!this.formAddLieux.invalid) {
-      this.ls.ajouterLieu(this.formValueVersLieux()).subscribe();
-      this.formAddLieux.reset();
-    }
-  }
 
-  /**
-   * Retourne un objet Lieux fabriqué à partir des données du form.
-   * @returns Lieu
-   **/
-  formValueVersLieux(): Lieux {
+  formValueToLieu() {
     return {
-      nom: this.formAddLieux.value.nom,
+      nom: this.editLieuForm.value.nom,
       adresse: this.adresse,
+      id_lieu: this.data.id_lieu,
     } as Lieux;
   }
 
-  constructor(private ls: LieuService, private ngZone: NgZone) {}
+  /**
+   * function qui permet de modifier un lieu dans la base de données
+   * @param data
+   */
+  updateLieu() {
+    if (!this.editLieuForm.invalid) {
+      let lieu = this.formValueToLieu();
+      this.ls.updateLieu(lieu).subscribe();
+    }
+  }
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Lieux,
+    private ls: LieuService,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {}
 

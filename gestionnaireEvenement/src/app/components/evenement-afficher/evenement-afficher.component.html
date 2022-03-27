@@ -11,7 +11,8 @@
   </div>
   <mat-accordion *ngFor="let event of eventsFuture" multi>
     <app-evennement-details [evennement]="event" [stagiaires]="stagiaires" [lieux]="lieux" [panelState]="panelState"
-      (delEvennementEventEmitter)="traiterSuppressionEvennement(event)" (updateEvennementEventEmitter)="updateEvents()">
+      ($addLieuEventEmitter)="updateLieux()" (delEvennementEventEmitter)="traiterSuppressionEvennement(event)"
+      (updateEvennementEventEmitter)="updateEvents()">
     </app-evennement-details>
   </mat-accordion>
   <mat-accordion>

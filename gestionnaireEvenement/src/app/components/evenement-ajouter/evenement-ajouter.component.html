@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Ajouter un évènement</h2>
 
-<div class="mat-typography">
+<div mat-dialog-content class="mat-typography">
   <form [formGroup]="formAddEvent" (submit)="addEvent()">
     <mat-form-field class=" name" appearance="fill">
       <mat-label for=" name">Nom</mat-label>
@@ -44,5 +44,8 @@
       </button>
     </div>
   </form>
+  <app-lieux ($addLieuEventEmitter)="addLieu($event)"></app-lieux>
 </div>
-<app-lieux></app-lieux>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

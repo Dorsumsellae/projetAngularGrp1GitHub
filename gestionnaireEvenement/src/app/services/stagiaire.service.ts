@@ -9,10 +9,6 @@ import { Observable } from 'rxjs';
 export class StagiaireService {
   stagiaireUrl = 'http://[::1]:3000/stagiaires/';
 
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-type': 'application/json' }),
-  };
-
   idStagiaireToStagiaire(
     id_stagiaire: number,
     stagiaires: Stagiaire[]

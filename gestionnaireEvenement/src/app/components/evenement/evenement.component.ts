@@ -11,27 +11,30 @@ import { LieuService } from 'src/app/services/lieu.service';
 })
 export class EvenementComponent implements OnInit, OnChanges {
   eventsFuture!: Evenement[];
-  eventsPast!: Evenement[];
-  nextEvent!: Evenement;
+  nextEvent: Evenement = {
+    id_evenement: -1,
+    Nom: 'Na',
+    Jour: new Date(Date.now()),
+    id_lieu: 0, //id_lieu
+    id_stagiaire: 0, // id_propriétaire
+    status: 1,
+  };
   lieux!: Lieux[];
 
   updateEvents() {
     this.eventsFuture = [];
-    this.eventsPast = [];
     this.eventService.getEvenement().subscribe((res) => {
       res.forEach((evenement) => {
         if (new Date(evenement.Jour) > new Date(Date.now())) {
           this.eventsFuture.push(evenement);
-        } else {
-          this.eventsPast.push(evenement);
         }
       });
+      this.nextEvent = this.findNextEvent(this.eventsFuture);
       this.ls.getLieux().subscribe((res: Lieux[]) => {
         this.lieux = res;
       });
     });
     console.log(this.eventsFuture);
-    console.log(this.eventsPast);
   }
 
   /**
@@ -60,9 +63,18 @@ export class EvenementComponent implements OnInit, OnChanges {
     }
     return nextEvent;
   }
+  /**
+   * fonction qui met à jour la liste des lieux
+   */
+  updateLieux() {
+    this.ls.getLieux().subscribe((res: Lieux[]) => {
+      this.lieux = res;
+    });
+  }
 
   constructor(private eventService: EvenementService, public ls: LieuService) {
     this.updateEvents();
+    this.updateLieux();
   }
 
   ngOnChanges() {

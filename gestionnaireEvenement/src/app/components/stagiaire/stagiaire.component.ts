@@ -29,7 +29,6 @@ export class StagiaireComponent implements OnInit, OnChanges {
     this.st.getStagiaire().subscribe((res) => {
       this.stagiaires = res;
     });
-    console.log(this.stagiaires);
   }
 
   /**

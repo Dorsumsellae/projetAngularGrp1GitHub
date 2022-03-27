@@ -4,6 +4,6 @@
     <mat-card-subtitle>{{nextEvent.Jour | date}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>Se déroulera à : {{this.ls.idLieuxToLieu(nextEvent.id_lieu, this.lieux)}}</p>
+    <p>Se déroulera à {{this.ls.idLieuxToLieu(nextEvent.id_lieu, this.lieux).nom}}</p>
   </mat-card-content>
 </mat-card>
