@@ -107,7 +107,7 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     evennementAsupprimer.status = 0;
     this.es.supprimerEvenement(evennementAsupprimer).subscribe(() => {
       this.updateEvents();
-      console.log('Erreur suppression Evennement');
+      this.gs.delAllInviteEvenement(evennementAsupprimer, this.guestsOfEvents);
     });
   }
 

@@ -44,7 +44,6 @@ export class EvennementDetailsComponent implements OnInit {
           this.stagiaires
         );
         this.invites.push(invitee);
-        console.log(this.invites);
       });
     });
   }

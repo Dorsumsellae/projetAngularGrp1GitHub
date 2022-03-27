@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Evenement } from '../models/evenement';
 import { Invite_evennement } from '../models/invite_evennement';
 
 @Injectable({
@@ -31,38 +32,59 @@ export class InviteEvenementService {
   ): number[] {
     let guestsOfEvent: number[];
     guestsOfEvent = invites_evenement
-      .filter((guestEvent) => guestEvent.id_evenement == id_evenement)
+      .filter(
+        (guestEvent) =>
+          guestEvent.id_evenement == id_evenement && guestEvent.status == 1
+      )
       .map((guestEvent) => guestEvent.id_stagiaire);
     return guestsOfEvent;
   }
 
-  getGuestsOfEventv(id_evenement: number) {
-    return this.http.get<Invite_evennement[]>(
-      this.invites_evenementUrl + '?filter[]'
-    );
-  }
   /**
    * Post un invité_évènement
    * @param invite_evenement
    * @returns
    */
   ajoutInviteEvenement(invite_evenement: Invite_evennement): Observable<any> {
+    invite_evenement.status = 1;
     return this.http.post(this.invites_evenementUrl, invite_evenement);
   }
 
   /**
-   * Mets à jour le status de l'invité_évènement
+   * Supprime un invité_évènement
    * @param invite_evenement
    * @returns
    */
-  supprimerEvenement(invite_evenement: Invite_evennement) {
+  delInviteEvenement(
+    invite_evenement: Invite_evennement,
+    id_stagiaire: number
+  ): Observable<any> {
     invite_evenement.status = 0;
     return this.http.patch(
-      this.invites_evenementUrl + '/' + invite_evenement.id_stagiaire,
-      {
-        body: invite_evenement,
-      }
+      `${this.invites_evenementUrl}/${id_stagiaire}?filter where:{and:[{id_evenement: ${invite_evenement.id_evenement}},{id_stagiaire: ${id_stagiaire}}]}`,
+      invite_evenement
     );
+  }
+
+  /**
+   * Del all invite_evenement of an event
+   * @param event
+   */
+  delAllInviteEvenement(
+    event: Evenement,
+    invites_evenement: Invite_evennement[]
+  ): void {
+    invites_evenement.forEach((invite_evenement) => {
+      if (
+        invite_evenement.id_evenement == event.id_evenement &&
+        invite_evenement.status == 1
+      ) {
+        this.delInviteEvenement(
+          invite_evenement,
+          invite_evenement.id_stagiaire
+        ).subscribe();
+      }
+    });
   }
 
   constructor(private http: HttpClient) {}
