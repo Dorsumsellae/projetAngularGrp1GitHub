@@ -19,7 +19,7 @@ CREATE TABLE lieu(
 CREATE TABLE evennement(
    id_evenement INT,
    Nom VARCHAR(50),
-   Jour DATE,
+   Jour DATETIME,
    id_lieu INT,
    id_stagiaire SMALLINT NOT NULL,
    PRIMARY KEY(id_evenement),
