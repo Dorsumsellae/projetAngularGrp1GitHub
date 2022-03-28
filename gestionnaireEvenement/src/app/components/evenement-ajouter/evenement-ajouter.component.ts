@@ -15,6 +15,7 @@ import { Stagiaire } from 'src/app/models/stagiaire';
 import { EvenementService } from 'src/app/services/evenement.service';
 import { InviteEvenementService } from 'src/app/services/invite-evenement.service';
 import { LieuService } from 'src/app/services/lieu.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-evenement-ajouter',
@@ -22,6 +23,8 @@ import { LieuService } from 'src/app/services/lieu.service';
   styleUrls: ['./evenement-ajouter.component.scss'],
 })
 export class EvenementAjouterComponent implements OnInit, OnChanges {
+
+  durationInSeconds = 5;
   @Output()
   $addLieuEventEmitter = new EventEmitter<Lieux>();
 
@@ -83,9 +86,14 @@ export class EvenementAjouterComponent implements OnInit, OnChanges {
     public data: { lieux: Lieux[]; stagiaires: Stagiaire[] },
     private es: EvenementService,
     private ies: InviteEvenementService,
-    private ls: LieuService
+    private ls: LieuService,
+    private _snackBar: MatSnackBar,
   ) {
     this.updateLieu();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   ngOnInit(): void {

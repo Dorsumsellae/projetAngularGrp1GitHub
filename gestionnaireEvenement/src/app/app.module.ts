@@ -56,6 +56,7 @@ import { LieuxComponent } from './components/lieux/lieux.component';
 import { EvennementDetailsComponent } from './components/evennement-details/evennement-details.component';
 import { LieuAjouterComponent } from './components/lieu-ajouter/lieu-ajouter.component';
 import { LieuModifierComponent } from './components/lieu-modifier/lieu-modifier.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -117,10 +118,11 @@ import { LieuModifierComponent } from './components/lieu-modifier/lieu-modifier.
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatSnackBarModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
