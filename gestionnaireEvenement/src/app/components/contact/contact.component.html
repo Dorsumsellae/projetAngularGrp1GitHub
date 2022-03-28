@@ -7,12 +7,12 @@
       <div class="alert">
         <div
           *ngIf="form.get('firstname')?.errors?.['required']&& (form.get('firstname')?.dirty || form.get('firstname')?.touched)">
-          Le Le nom doit comporter au moins 2 caractères</div>
+           Le nom doit comporter au moins 2 caractères</div>
       </div>
     </mat-form-field>
 
     <mat-form-field class="input-form" appearance="fill">
-      <mat-label>Prenom :</mat-label>
+      <mat-label>Prénom :</mat-label>
       <input matInput type="text" name="prenom" formControlName="prenom">
     </mat-form-field>
 
@@ -25,6 +25,6 @@
       <mat-label>Email :</mat-label>
       <input matInput type="text" formControlName="mail">
     </mat-form-field>
-    <button mat-raised-button [disabled]="this.form.invalid" type="submit">Contactez moi!</button>
+    <button mat-raised-button [disabled]="this.form.invalid" type="submit">Contactez-moi!</button>
   </form>
 </mat-card>

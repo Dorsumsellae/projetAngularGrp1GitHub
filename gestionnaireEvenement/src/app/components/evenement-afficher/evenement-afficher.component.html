@@ -1,13 +1,14 @@
 <mat-card>
   <mat-card-title>
-    Evenements à venir
+    Évenements à venir
+
     <button mat-fab aria-label="Ajouter un évènement" (click)="openAddEventDialog(lieux, stagiaires)">
       <mat-icon>plus_one</mat-icon>
     </button>
   </mat-card-title>
   <div class="example-action-buttons">
-    <button mat-button (click)="expandPanel()">Expand All</button>
-    <button mat-button (click)="collapsePanel()">Collapse All</button>
+    <button mat-button (click)="expandPanel()">Dérouler</button>
+    <button mat-button (click)="collapsePanel()">Réduire</button>
   </div>
   <mat-accordion *ngFor="let event of eventsFuture" multi>
     <app-evennement-details [evennement]="event" [stagiaires]="stagiaires" [lieux]="lieux" [panelState]="panelState"
@@ -19,7 +20,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Evènements passés
+          Évènements passés
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div *ngFor="let event of eventsPast">
@@ -29,8 +30,8 @@
           </mat-card-title>
           <mat-card-content>
             <p> Lieu : {{this.ls.idLieuxToLieu(event.id_lieu, lieux).nom}}</p>
-            <p>Date : {{event.Jour | date : 'short' }}</p>
-            <p>Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
+            <p> Date : {{event.Jour | date : 'short' }}</p>
+            <p> Créé par {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).prenom}}
               {{this.stagS.idStagiaireToStagiaire(event.id_stagiaire,stagiaires).nom}}</p>
           </mat-card-content>
         </mat-card>
