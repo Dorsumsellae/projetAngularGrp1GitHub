@@ -1,14 +1,15 @@
-<mat-card>
-  <mat-card-header>
+<mat-card class="example-card">
+  <mat-card-title-group>
     <mat-card-title>{{nextEvent.Nom}}</mat-card-title>
-    <mat-card-subtitle>{{nextEvent.Jour | date}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>Se déroulera à {{this.ls.idLieuxToLieu(nextEvent.id_lieu, this.lieux).nom}}</p>
+    <mat-card-subtitle>{{nextEvent.Jour | date}}
+      <p>Se déroulera à {{this.ls.idLieuxToLieu(nextEvent.id_lieu, this.lieux).nom}}</p>
+    </mat-card-subtitle>
     <google-map [zoom]="zoom" [center]="center" [options]="options" class="map">
       <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
         [title]="marker.title" [options]="marker.options">
       </map-marker>
     </google-map>
+  </mat-card-title-group>
+  <mat-card-content>
   </mat-card-content>
 </mat-card>
