@@ -11,6 +11,8 @@ CREATE TABLE lieu(
    id_lieu SMALLINT NOT NULL AUTO_INCREMENT,
    nom VARCHAR(50),
    adresse VARCHAR(50),
+   lat REAL,
+   lon REAL,
    PRIMARY KEY(id_lieu)
 );
 
