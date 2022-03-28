@@ -15,7 +15,7 @@
       <p>
         <span *ngFor="let invite of invites">{{invite.prenom}} {{invite.nom}}, </span>
       </p>
-      <p>Créé par {{proprietaire.prenom}}
+      <p>Crée par {{proprietaire.prenom}}
         {{proprietaire.nom}}</p>
       <button mat-mini-fab color="accent" aria-label="Modifier l'évènement"
         class="event_future_header_description_button" (click)="openUpdateEventDialog(evennement)">
@@ -23,7 +23,7 @@
       </button>
       <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement"
         class="event_future_header_description_button" (click)="onClickBoutonSupprimer(evennement)">
-        <mat-icon>delete</mat-icon>
+        <mat-icon>Supprimer</mat-icon>
       </button>
     </div>
     <div>

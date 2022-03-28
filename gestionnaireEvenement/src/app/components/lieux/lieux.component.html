@@ -8,7 +8,7 @@
   </button>
 
   <mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
+    
     <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher un lieu" #input>
   </mat-form-field>
 
@@ -25,7 +25,7 @@
           <div class="example-element-diagram">
           </div>
           <div class="example-element-description">
-            Descripttion de {{element.nom}}
+            Description de {{element.nom}}
           </div>
           <button mat-mini-fab color="accent" aria-label="Modifier l'évènement"
             class="event_future_header_description_button" (click)="openEditLieuDialog(element)">
