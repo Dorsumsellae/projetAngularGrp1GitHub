@@ -46,6 +46,23 @@ export class LieuxComponent implements OnInit, AfterViewInit {
   isLoadingResults = true;
   resultsLength = 0;
   expandedElement!: Lieux | null;
+  marker = {
+    options: { animation: google.maps.Animation.DROP },
+  };
+
+  /**
+   * google maps options
+   */
+  zoom = 18;
+  center!: google.maps.LatLngLiteral;
+  options: google.maps.MapOptions = {
+    mapTypeId: 'hybrid',
+    zoomControl: true,
+    scrollwheel: true,
+    disableDoubleClickZoom: true,
+    maxZoom: 20,
+    minZoom: 8,
+  };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
@@ -115,7 +132,12 @@ export class LieuxComponent implements OnInit, AfterViewInit {
     //this.updateLieux();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.center = {
+      lat: 43.547597,
+      lng: 1.50157,
+    };
+  }
 
   ngAfterViewInit() {
     console.log(this.sort);

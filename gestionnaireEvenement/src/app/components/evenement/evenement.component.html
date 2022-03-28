@@ -5,5 +5,10 @@
   </mat-card-header>
   <mat-card-content>
     <p>Se déroulera à {{this.ls.idLieuxToLieu(nextEvent.id_lieu, this.lieux).nom}}</p>
+    <google-map [zoom]="zoom" [center]="center" [options]="options">
+      <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+        [title]="marker.title" [options]="marker.options">
+      </map-marker>
+    </google-map>
   </mat-card-content>
 </mat-card>

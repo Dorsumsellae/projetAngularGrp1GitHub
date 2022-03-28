@@ -6,11 +6,15 @@ export class Invites_evennement extends Entity {
     type: 'number',
     id: true,
   })
+  id_invite?: number;
+
+  @property({
+    type: 'number',
+  })
   id_stagiaire?: number;
 
   @property({
     type: 'number',
-    id: true,
   })
   id_evenement: number;
 

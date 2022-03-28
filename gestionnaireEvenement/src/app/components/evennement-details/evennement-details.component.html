@@ -8,21 +8,29 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-card-content>
-    <h3>
-      Lieu : {{this.ls.idLieuxToLieu(evennement.id_lieu, lieux).nom}}
-    </h3>
-    <p>
-      <span *ngFor="let invite of invites">{{invite.prenom}} {{invite.nom}}, </span>
-    </p>
-    <p>Créé par {{this.stagS.idStagiaireToStagiaire(evennement.id_stagiaire,stagiaires).prenom}}
-      {{this.stagS.idStagiaireToStagiaire(evennement.id_stagiaire,stagiaires).nom}}</p>
-    <button mat-mini-fab color="accent" aria-label="Modifier l'évènement" class="event_future_header_description_button"
-      (click)="openUpdateEventDialog(evennement)">
-      <mat-icon>auto_fix_normal</mat-icon>
-    </button>
-    <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement" class="event_future_header_description_button"
-      (click)="onClickBoutonSupprimer(evennement)">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <div class="lieu_description">
+      <h3>
+        Lieu : {{lieu.nom}}
+      </h3>
+      <p>
+        <span *ngFor="let invite of invites">{{invite.prenom}} {{invite.nom}}, </span>
+      </p>
+      <p>Créé par {{proprietaire.prenom}}
+        {{proprietaire.nom}}</p>
+      <button mat-mini-fab color="accent" aria-label="Modifier l'évènement"
+        class="event_future_header_description_button" (click)="openUpdateEventDialog(evennement)">
+        <mat-icon>auto_fix_normal</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement"
+        class="event_future_header_description_button" (click)="onClickBoutonSupprimer(evennement)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div>
+      <google-map [zoom]="zoom" [center]="center" [options]="options">
+        <map-marker [position]="{lat:lieu.lat,lng:lieu.lon}" [label]="evennement.Nom" [title]="evennement.Nom"
+          [options]="marker.options"></map-marker>
+      </google-map>
+    </div>
   </mat-card-content>
 </mat-expansion-panel>

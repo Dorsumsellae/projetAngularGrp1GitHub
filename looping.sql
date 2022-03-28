@@ -14,7 +14,7 @@ CREATE TABLE lieu(
    PRIMARY KEY(id_lieu)
 );
 
-CREATE TABLE Evennement(
+CREATE TABLE vennement(
    id_evenement SMALLINT NOT NULL AUTO_INCREMENT,
    Nom VARCHAR(50),
    Jour DATETIME,

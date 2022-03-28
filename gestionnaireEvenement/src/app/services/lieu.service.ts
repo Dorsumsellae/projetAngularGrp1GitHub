@@ -65,7 +65,7 @@ export class LieuService {
         id_lieu: -1,
         nom: '0',
         adresse: '0',
-      };
+      } as Lieux;
     } else {
       lieu = result;
     }

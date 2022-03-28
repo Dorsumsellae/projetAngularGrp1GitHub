@@ -55,13 +55,10 @@ export class InviteEvenementService {
    * @param invite_evenement
    * @returns
    */
-  delInviteEvenement(
-    invite_evenement: Invite_evennement,
-    id_stagiaire: number
-  ): Observable<any> {
+  delInviteEvenement(invite_evenement: Invite_evennement): Observable<any> {
     invite_evenement.status = 0;
     return this.http.patch(
-      `${this.invites_evenementUrl}/${id_stagiaire}?filter where:{and:[{id_evenement: ${invite_evenement.id_evenement}},{id_stagiaire: ${id_stagiaire}}]}`,
+      `${this.invites_evenementUrl}/${invite_evenement.id_invite}`,
       invite_evenement
     );
   }
@@ -79,12 +76,62 @@ export class InviteEvenementService {
         invite_evenement.id_evenement == event.id_evenement &&
         invite_evenement.status == 1
       ) {
-        this.delInviteEvenement(
-          invite_evenement,
-          invite_evenement.id_stagiaire
-        ).subscribe();
+        this.delInviteEvenement(invite_evenement).subscribe();
       }
     });
+  }
+
+  /**
+   * Update status of invite_evenement
+   * @param invite_evenement
+   */
+  updateInviteEvenement(invite_evenement: Invite_evennement): Observable<any> {
+    return this.http.patch(
+      `${this.invites_evenementUrl}/${invite_evenement.id_invite}`,
+      invite_evenement
+    );
+  }
+
+  /**
+   * function qui compare les invites_evenement de l'évènement avec les invites_evenement de l'évènement passé en paramètre
+   * et renvoie les invites_evenement qui sont nouveaux
+   * @param invites_evenement: Invite_evennement[] : invites_evenement de l'évènement modifié
+   * @param guestsOfEvent: number[]  : invites_evenement de l'évènement non modifié
+   *
+   */
+  getNewInviteEvenement(
+    invites_evenement: Invite_evennement[],
+    guestsOfEvent: number[]
+  ): Invite_evennement[] {
+    let newInviteEvenement: Invite_evennement[];
+    newInviteEvenement = invites_evenement
+      .filter(
+        (invite_evenement) =>
+          guestsOfEvent.indexOf(invite_evenement.id_stagiaire) == -1
+      )
+      .map((invite_evenement) => invite_evenement);
+    return newInviteEvenement;
+  }
+
+  /**
+   * function qui compare les invites_evenement de l'évènement avec les invites_evenement de l'évènement acien
+   * et renvoie les invites_evenement qui sont supprimés
+   * @param invites_evenement: Invite_evennement[] : invites_evenement de l'évènement modifié
+   * @param guestsOfEvent: Invite_evenement[]  : invites_evenement de l'évènement non modifié
+   */
+  getDelInviteEvenement(
+    invites_evenement: Invite_evennement[],
+    guestsOfEvent: Invite_evennement[]
+  ): Invite_evennement[] {
+    let delInviteEvenement: Invite_evennement[];
+    let idOfInvestsEvenement: number[] = invites_evenement.map(
+      (invite_evenement) => invite_evenement.id_stagiaire
+    );
+    delInviteEvenement = guestsOfEvent.filter(
+      (guestOfevent) =>
+        idOfInvestsEvenement.includes(guestOfevent.id_stagiaire) == false
+    );
+    return delInviteEvenement;
   }
 
   constructor(private http: HttpClient) {}
