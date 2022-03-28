@@ -17,9 +17,9 @@
 
     <mat-form-field>
       <mat-label for="date">Choisissez une date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput [ngxMatDatetimePicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
