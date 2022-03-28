@@ -35,6 +35,12 @@
             class="event_future_header_description_button" (click)="deleteLieu(element)">
             <mat-icon>delete</mat-icon>
           </button>
+          <div class="googlemaps">
+            <!--             <google-map [zoom]="zoom" [center]="{lat:element.lat,lng:element.lon}" [options]="options">
+              <map-marker [position]="{lat:element.lat,lng:element.lon}" [label]="element.nom" [title]="element.nom"
+                [options]="marker.options"></map-marker>
+            </google-map> -->
+          </div>
         </div>
       </td>
     </ng-container>

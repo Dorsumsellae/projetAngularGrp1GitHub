@@ -32,7 +32,25 @@ export class EvennementDetailsComponent implements OnInit {
   @Output()
   delEvennementEventEmitter = new EventEmitter<Evenement>();
 
+  marker = {
+    options: { animation: google.maps.Animation.DROP },
+  };
+  zoom = 18;
+  center!: google.maps.LatLngLiteral;
+  options: google.maps.MapOptions = {
+    mapTypeId: 'hybrid',
+    zoomControl: true,
+    scrollwheel: true,
+    disableDoubleClickZoom: true,
+    maxZoom: 20,
+    minZoom: 8,
+  };
+
   invites: Stagiaire[] = [];
+
+  proprietaire!: Stagiaire;
+
+  lieu!: Lieux;
 
   updateInvites(id_evenement: number) {
     this.invites = [];
@@ -69,6 +87,26 @@ export class EvennementDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.proprietaire = this.stagS.idStagiaireToStagiaire(
+      this.evennement.id_stagiaire,
+      this.stagiaires
+    );
+
+    this.lieu = this.ls.idLieuxToLieu(this.evennement.id_lieu, this.lieux);
+
     this.updateInvites(this.evennement.id_evenement);
+    console.log('lieu.lat', this.lieu.lat);
+
+    if (!(this.lieu.lat == undefined && this.lieu.lon == undefined)) {
+      this.center = {
+        lat: this.lieu.lat,
+        lng: this.lieu.lon,
+      };
+    } else {
+      this.center = {
+        lat: 48.856614,
+        lng: 2.3522219,
+      };
+    }
   }
 }

@@ -32,6 +32,7 @@ export class LieuAjouterComponent implements OnInit {
    */
   traiterFormulaire() {
     if (!this.formAddLieux.invalid) {
+      console.log(this.formValueVersLieux());
       this.ls.ajouterLieu(this.formValueVersLieux()).subscribe();
       this.formAddLieux.reset();
     }
@@ -45,6 +46,8 @@ export class LieuAjouterComponent implements OnInit {
     return {
       nom: this.formAddLieux.value.nom,
       adresse: this.adresse,
+      lat: this.latitude,
+      lon: this.longitude,
     } as Lieux;
   }
 
@@ -70,8 +73,16 @@ export class LieuAjouterComponent implements OnInit {
         console.log({ place }, place.geometry.location?.lat());
 
         //set latitude, longitude and zoom
-        this.latitude = place.geometry.location?.lat();
-        this.longitude = place.geometry.location?.lng();
+        this.latitude = parseFloat(
+          place.geometry.location?.lat().toFixed(6) == undefined
+            ? '0'
+            : place.geometry.location?.lat().toFixed(6)
+        );
+        this.longitude = parseFloat(
+          place.geometry.location?.lng().toFixed(6) == undefined
+            ? '0'
+            : place.geometry.location?.lng().toFixed(6)
+        );
         if (!(place.formatted_address === undefined)) {
           this.adresse = place.formatted_address;
         }

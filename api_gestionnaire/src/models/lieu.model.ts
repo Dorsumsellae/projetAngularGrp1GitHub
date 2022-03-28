@@ -19,6 +19,15 @@ export class Lieu extends Entity {
   })
   adresse?: string;
 
+  @property({
+    type: 'number',
+  })
+  lat?: number;
+
+  @property({
+    type: 'number',
+  })
+  lon?: number;
 
   constructor(data?: Partial<Lieu>) {
     super(data);

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { delay, Observable, observable } from 'rxjs';
 import { Evenement } from 'src/app/models/evenement';
 import { Invite_evennement } from 'src/app/models/invite_evennement';
 import { Lieux } from 'src/app/models/lieux';
@@ -17,16 +18,18 @@ import { StagiaireService } from 'src/app/services/stagiaire.service';
 })
 export class EvenementModifierComponent implements OnInit {
   stagiaires: Stagiaire[] = [];
+  stagiairesID: Number[] = [];
   lieux: Lieux[] = [];
   invitesEvenements: Invite_evennement[] = [];
   invites: Invite_evennement[] = [];
   invitesStagIds: number[] = [];
+  invitesIndex: number[] = [];
 
   formUpdateEvent = new FormGroup({
     name: new FormControl(this.data.Nom, Validators.required),
     lieu: new FormControl(this.data.id_lieu),
     date: new FormControl(this.data.Jour),
-    invites: new FormControl(this.invitesStagIds),
+    invites: new FormControl(),
     proprietaire: new FormControl(this.data.id_stagiaire),
   });
 
@@ -71,6 +74,12 @@ export class EvenementModifierComponent implements OnInit {
   updateStagiaire() {
     this.stagS.getStagiaire().subscribe((res) => {
       this.stagiaires = res;
+      this.stagiairesID = this.stagiaires.map(
+        (stagiaire) => stagiaire.id_stagiaire
+      );
+      this.invitesIndex = this.invites.map((invite) =>
+        this.stagiairesID.indexOf(invite.id_stagiaire)
+      );
     });
   }
 
@@ -124,10 +133,12 @@ export class EvenementModifierComponent implements OnInit {
     private stagS: StagiaireService,
     private is: InviteEvenementService
   ) {
+    this.updateStagiaire();
     this.updateInvites();
     this.updateLieu();
-    this.updateStagiaire();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formUpdateEvent.value.invites = this.invitesIndex;
+  }
 }
