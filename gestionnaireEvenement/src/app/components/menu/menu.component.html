@@ -1,15 +1,24 @@
 <nav class="navigation">
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Accueil">
-      <app-home></app-home>
+      <ng-template matTabContent>
+        <app-home></app-home>
+      </ng-template>
     </mat-tab>
     <mat-tab label="Évenements">
-      <app-evenement-afficher></app-evenement-afficher>
+      <ng-template matTabContent>
+        <app-evenement-afficher></app-evenement-afficher>
+      </ng-template>
     </mat-tab>
     <mat-tab label="Stagiaires">
-      <app-stagiaire></app-stagiaire>
+      <ng-template matTabContent>
+        <app-stagiaire></app-stagiaire>
+      </ng-template>
     </mat-tab>
     <mat-tab label="Lieux">
+      <ng-template matTabContent>
+        <app-lieux></app-lieux>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 </nav>

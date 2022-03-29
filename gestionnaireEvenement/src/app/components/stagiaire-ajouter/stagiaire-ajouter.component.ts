@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Stagiaire } from 'src/app/models/stagiaire';
 import { StagiaireService } from 'src/app/services/stagiaire.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-stagiaire-ajouter',
@@ -41,7 +42,13 @@ export class StagiaireAjouterComponent implements OnInit {
   }
   
 
-  constructor(private stags: StagiaireService) {}
- 
-  ngOnInit(): void {}
+  constructor(private stags: StagiaireService,
+    private _snackBar: MatSnackBar) { }
+
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+
+  ngOnInit(): void { }
 }

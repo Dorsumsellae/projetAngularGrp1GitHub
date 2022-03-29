@@ -6,7 +6,7 @@ const config = {
   connector: 'mysql',
   url: '',
   host: 'localhost',
-  port: 3306,
+  port: 8889,
   user: 'gestionnaire',
   password: '',
   database: 'gestionnaire',

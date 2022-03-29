@@ -69,6 +69,9 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
           }
         }
       });
+      console.log(this.eventsFuture);
+      console.log(this.eventsPast);
+
       this.ls.getLieux().subscribe((res: Lieux[]) => {
         this.lieux = res;
       });
@@ -150,11 +153,20 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
   ) {
     this.updateGuests();
     this.updateStagiaires();
+    this.updateLieux();
+  }
+
+  ngOnInit(): void {
+    this.updateGuests();
+    this.updateStagiaires();
     this.updateEvents();
     this.updateLieux();
   }
 
-  ngOnInit(): void {}
-
-  ngOnChanges(): void {}
+  ngOnChanges(): void {
+    this.updateGuests();
+    this.updateStagiaires();
+    this.updateEvents();
+    this.updateLieux();
+  }
 }

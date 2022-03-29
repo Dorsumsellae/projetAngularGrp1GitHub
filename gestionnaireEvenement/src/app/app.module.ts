@@ -8,8 +8,10 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -56,7 +58,41 @@ import { LieuxComponent } from './components/lieux/lieux.component';
 import { EvennementDetailsComponent } from './components/evennement-details/evennement-details.component';
 import { LieuAjouterComponent } from './components/lieu-ajouter/lieu-ajouter.component';
 import { LieuModifierComponent } from './components/lieu-modifier/lieu-modifier.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { StartComponent } from './components/start/start.component';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { LoggedComponent } from './components/logged/logged.component';
+import { LANGUAGE_CODE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
+import { SigninComponent } from './components/signin/signin.component';
 
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      scopes: ['public_profile', 'email', 'user_likes', 'user_friends'],
+      customParameters: {
+        auth_type: 'reauthenticate',
+      },
+      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    },
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    {
+      requireDisplayName: false,
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    },
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+  ],
+  //term of service
+  tosUrl: '<your-tos-link>',
+  //privacy url
+  privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
+  //credentialHelper:             firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +117,9 @@ import { LieuModifierComponent } from './components/lieu-modifier/lieu-modifier.
     EvennementDetailsComponent,
     LieuAjouterComponent,
     LieuModifierComponent,
+    StartComponent,
+    LoggedComponent,
+    SigninComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,11 +156,19 @@ import { LieuModifierComponent } from './components/lieu-modifier/lieu-modifier.
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    
+    MatSnackBarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [],
+  providers: [
+    { provide: LANGUAGE_CODE, useValue: 'fr' },
+    { provide: USE_DEVICE_LANGUAGE, useValue: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
