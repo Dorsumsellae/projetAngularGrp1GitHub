@@ -23,7 +23,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./evenement-ajouter.component.scss'],
 })
 export class EvenementAjouterComponent implements OnInit, OnChanges {
-
   durationInSeconds = 5;
   @Output()
   $addLieuEventEmitter = new EventEmitter<Lieux>();
@@ -60,7 +59,7 @@ export class EvenementAjouterComponent implements OnInit, OnChanges {
       Nom: this.formAddEvent.value.name,
       id_lieu: this.formAddEvent.value.lieu,
       Jour: new Date(this.formAddEvent.value.date),
-      id_stagiaire: 1,
+      id_stagiaire: this.formAddEvent.value.proprietaire,
     } as Evenement;
   }
 
@@ -87,7 +86,7 @@ export class EvenementAjouterComponent implements OnInit, OnChanges {
     private es: EvenementService,
     private ies: InviteEvenementService,
     private ls: LieuService,
-    private _snackBar: MatSnackBar,
+    private _snackBar: MatSnackBar
   ) {
     this.updateLieu();
   }
