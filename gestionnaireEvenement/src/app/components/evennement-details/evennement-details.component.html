@@ -17,14 +17,16 @@
       </p>
       <p>Crée par {{proprietaire.prenom}}
         {{proprietaire.nom}}</p>
-      <button mat-mini-fab color="accent" aria-label="Modifier l'évènement"
-        class="event_future_header_description_button" (click)="openUpdateEventDialog(evennement)">
-        <mat-icon>auto_fix_normal</mat-icon>
-      </button>
-      <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement"
-        class="event_future_header_description_button" (click)="onClickBoutonSupprimer(evennement)">
-        <mat-icon>delete</mat-icon>
-      </button>
+      <div dir="rtl" fxLayoutGap="20px">
+        <button mat-mini-fab color="accent" aria-label="Modifier l'évènement"
+          class="event_future_header_description_button" (click)="openUpdateEventDialog(evennement)">
+          <mat-icon>auto_fix_normal</mat-icon>
+        </button>
+        <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement"
+          class="event_future_header_description_button" (click)="onClickBoutonSupprimer(evennement)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
     <div>
       <google-map [zoom]="zoom" [center]="center" [options]="options">

@@ -1,10 +1,14 @@
-<h2>Liste des stagiaires</h2>
-<button mat-fab aria-label="Ajouter un stagiaire" (click)="openAddStagiaireDialog()">
-  <mat-icon>plus_one</mat-icon>
-</button>
-<div *ngFor="let stagiaire of stagiaires; index as i">
-  <app-stagiaire-details (click)="afficherInfoStagiaire(stagiaire)"
-    (deleteStagiaireEvent)="traiterSuppressionStagiaire($event)" (updateStagiaireEvent)="updateStagiaires()"
-    [stagiaire]="stagiaire" [numero]="i">
-  </app-stagiaire-details>
-</div>
+<mat-card class="card">
+  <div fxLayout="row" fxLayoutAlign="space-between stretch">
+    <h2>Liste des stagiaires</h2>
+    <button mat-fab aria-label="Ajouter un stagiaire" (click)="openAddStagiaireDialog()">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  </div>
+  <div *ngFor="let stagiaire of stagiaires; index as i">
+    <app-stagiaire-details (click)="afficherInfoStagiaire(stagiaire)"
+      (deleteStagiaireEvent)="traiterSuppressionStagiaire($event)" (updateStagiaireEvent)="updateStagiaires()"
+      [stagiaire]="stagiaire" [numero]="i">
+    </app-stagiaire-details>
+  </div>
+</mat-card>

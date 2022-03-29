@@ -1,62 +1,66 @@
-<div class="mat-elevation-z8">
-  <div class="example-loading-shade" *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+<mat-card class="card">
+  <div class="mat-elevation-z8">
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+      <h2>Liste Lieux </h2>
+      <button mat-fab aria-label="Ajouter un évènement" (click)="openAddLieuDialog()">
+        <mat-icon>plus_one</mat-icon>
+      </button>
+    </div>
+
+    <mat-form-field appearance="standard">
+
+      <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher un lieu" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="example-element-description">
+              Description de {{element.nom}}
+            </div>
+            <div dir="rtl" fxLayoutGap="20px" fxLayoutAlign="end end">
+              <button mat-mini-fab color="accent" aria-label="Modifier l'évènement"
+                class="event_future_header_description_button" (click)="openEditLieuDialog(element)">
+                <mat-icon>auto_fix_normal</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement"
+                class="event_future_header_description_button" (click)="deleteLieu(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div class="googlemaps">
+              <!--             <google-map [zoom]="zoom" [center]="{lat:element.lat,lng:element.lon}" [options]="options">
+                <map-marker [position]="{lat:element.lat,lng:element.lon}" [label]="element.nom" [title]="element.nom"
+                  [options]="marker.options"></map-marker>
+              </google-map> -->
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Aucun lieu correspondant à "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [length]="5" [pageSize]="10" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
   </div>
-  <h2>Liste Lieux </h2>
-  <button mat-fab aria-label="Ajouter un évènement" (click)="openAddLieuDialog()">
-    <mat-icon>plus_one</mat-icon>
-  </button>
-
-  <mat-form-field appearance="standard">
-    
-    <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher un lieu" #input>
-  </mat-form-field>
-
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
-    <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-    </ng-container>
-
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <div class="example-element-diagram">
-          </div>
-          <div class="example-element-description">
-            Description de {{element.nom}}
-          </div>
-          <button mat-mini-fab color="accent" aria-label="Modifier l'évènement"
-            class="event_future_header_description_button" (click)="openEditLieuDialog(element)">
-            <mat-icon>auto_fix_normal</mat-icon>
-          </button>
-          <button mat-mini-fab color="warn" aria-label="Supprimer l'évènement"
-            class="event_future_header_description_button" (click)="deleteLieu(element)">
-            <mat-icon>delete</mat-icon>
-          </button>
-          <div class="googlemaps">
-            <!--             <google-map [zoom]="zoom" [center]="{lat:element.lat,lng:element.lon}" [options]="options">
-              <map-marker [position]="{lat:element.lat,lng:element.lon}" [label]="element.nom" [title]="element.nom"
-                [options]="marker.options"></map-marker>
-            </google-map> -->
-          </div>
-        </div>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-    </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">Aucun lieu correspondant à "{{input.value}}"</td>
-    </tr>
-  </table>
-  <mat-paginator [length]="5" [pageSize]="10" showFirstLastButtons aria-label="Select page of periodic elements">
-  </mat-paginator>
-</div>
+</mat-card>
