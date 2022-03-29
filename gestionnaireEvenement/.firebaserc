@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angularprojecteventhandler": {
+      "hosting": {
+        "gestionnaireEvenement": [
+          "angularprojecteventhandler"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angularprojecteventhandler"
+  }
+}

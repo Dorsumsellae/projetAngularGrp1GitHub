@@ -153,7 +153,17 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     this.updateLieux();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updateGuests();
+    this.updateStagiaires();
+    this.updateEvents();
+    this.updateLieux();
+  }
 
-  ngOnChanges(): void {}
+  ngOnChanges(): void {
+    this.updateGuests();
+    this.updateStagiaires();
+    this.updateEvents();
+    this.updateLieux();
+  }
 }

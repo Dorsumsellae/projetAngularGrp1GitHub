@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-title>Créer un compte</mat-card-title>
+
+  <form [formGroup]="formSignin" (submit)="createAccount()">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input matInput type="password" formControlName="password">
+    </mat-form-field>
+    <button mat-fab color="primary" [disabled]="this.formSignin.invalid" type="submit">
+      <mat-icon>done</mat-icon>
+    </button>
+  </form>
+</mat-card>
