@@ -124,13 +124,16 @@ export class EvenementComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.updateEvents();
-    this.nextEvent = this.findNextEvent(this.eventsFuture);
+    this.updateLieux();
     this.updateMarkers();
+    this.nextEvent = this.findNextEvent(this.eventsFuture);
     console.log('marker', this.markers);
   }
   ngOnInit(): void {
-    this.nextEvent = this.findNextEvent(this.eventsFuture);
+    this.updateLieux();
+    this.updateEvents();
     this.updateMarkers();
+    this.nextEvent = this.findNextEvent(this.eventsFuture);
     console.log('marker', this.markers);
 
     this.center = {

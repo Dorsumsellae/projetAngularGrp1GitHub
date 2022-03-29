@@ -78,8 +78,16 @@ export class LieuModifierComponent implements OnInit {
         console.log({ place }, place.geometry.location?.lat());
 
         //set latitude, longitude and zoom
-        this.latitude = place.geometry.location?.lat();
-        this.longitude = place.geometry.location?.lng();
+        this.latitude = parseFloat(
+          place.geometry.location?.lat().toFixed(6) == undefined
+            ? '0'
+            : place.geometry.location?.lat().toFixed(6)
+        );
+        this.longitude = parseFloat(
+          place.geometry.location?.lng().toFixed(6) == undefined
+            ? '0'
+            : place.geometry.location?.lng().toFixed(6)
+        );
         if (!(place.formatted_address === undefined)) {
           this.adresse = place.formatted_address;
         }

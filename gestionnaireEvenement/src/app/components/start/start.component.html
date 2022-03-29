@@ -1,0 +1,24 @@
+<mat-card>
+  <div *ngIf="auth.user | async as user; else showLogin">
+    <mat-card-title>Bonjour ! {{ user.displayName }}!</mat-card-title>
+    <button mat-raised-button color="warn" (click)="logout()">Déconnexion</button>
+  </div>
+  <ng-template #showLogin>
+    <mat-card-title>Connexion</mat-card-title>
+    <form (submit)="loginEmail()" [formGroup]="formlogin">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" formControlName="password">
+      </mat-form-field>
+      <button mat-fab color="primary" [disabled]="this.formlogin.invalid" type="submit">
+        <mat-icon>done</mat-icon>
+      </button>
+    </form>
+    <button mat-raised-button color="primary" (click)="loginGoogle()">Identifiez-vous avec Google</button>
+    <button mat-raised-button color="primary" (click)="signIn()">Créer un compte</button>
+  </ng-template>
+</mat-card>
