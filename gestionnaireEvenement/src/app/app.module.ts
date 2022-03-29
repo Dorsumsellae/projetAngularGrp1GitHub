@@ -11,7 +11,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -66,33 +65,7 @@ import { LoggedComponent } from './components/logged/logged.component';
 import { LANGUAGE_CODE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
 import { SigninComponent } from './components/signin/signin.component';
 
-const firebaseUiAuthConfig: firebaseui.auth.Config = {
-  signInFlow: 'popup',
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    {
-      scopes: ['public_profile', 'email', 'user_likes', 'user_friends'],
-      customParameters: {
-        auth_type: 'reauthenticate',
-      },
-      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    },
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    {
-      requireDisplayName: false,
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    },
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
-  ],
-  //term of service
-  tosUrl: '<your-tos-link>',
-  //privacy url
-  privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
-  //credentialHelper:             firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM
-  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -158,7 +131,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatListModule,
     MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebase),
-    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
