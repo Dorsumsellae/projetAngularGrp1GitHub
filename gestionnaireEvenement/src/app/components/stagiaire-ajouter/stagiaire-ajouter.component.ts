@@ -15,6 +15,7 @@ export class StagiaireAjouterComponent implements OnInit {
     telephone: new FormControl(''),
     adresse: new FormControl('', Validators.email),
   });
+  
 
   /**
    * Fonction qui ajoute un stagiaire a la base de donnée et qui réinitialise le formulaire
@@ -38,8 +39,9 @@ export class StagiaireAjouterComponent implements OnInit {
       adresse: this.formaddStag.value.adresse,
     } as Stagiaire;
   }
+  
 
   constructor(private stags: StagiaireService) {}
-
+ 
   ngOnInit(): void {}
 }

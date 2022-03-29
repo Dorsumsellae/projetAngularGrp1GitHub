@@ -96,6 +96,7 @@ export class EvenementAfficherComponent implements OnInit, OnChanges {
     this.ls.getLieux().subscribe((res: Lieux[]) => {
       this.lieux = res;
       this.eventDialog.closeAll();
+      
     });
   }
 

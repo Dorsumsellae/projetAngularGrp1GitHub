@@ -117,6 +117,7 @@ import { LieuModifierComponent } from './components/lieu-modifier/lieu-modifier.
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
